@@ -48,7 +48,7 @@ Once the PWA is complete, you will need to deploy it to a hosting service so tha
   - Webpack for bundling
   - Babel for transpiling
 
-- **Backtend**
+- **Backend**
   - Linux CENTOS 8
   - Node 18
 
