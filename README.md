@@ -40,6 +40,8 @@ Once the PWA is complete, you will need to deploy it to a hosting service so tha
 
 ### 4) Infrastructure Stack
 
+The goal is not to use heavy frameworks or libraries that only make the application slow and difficult to maintain. The Web Standards already provide enough, and natively in browsers, to support various features. The focus is on making the most of these native browser features, while keeping the PWA Application fully compatible with browsers and devices that were 10 years old.
+
 - **Frontend**
   - Pure JavaScript (ES2021)
   - HTML 5
