@@ -41,4 +41,6 @@ Once the PWA is complete, you will need to deploy it to a hosting service so tha
 ### 4) Notes:
 
 - This application is for case study only, and may need a lot of adjustments to be fully funcional. 
+- The development focus now is towards the login screen to dashboard when user fully authenticated. 
+- User authentication now is focused in local username/password, and next step in the authentication development will be towards "Social Authentication" using gmail, outlook and apple logins. 
 
