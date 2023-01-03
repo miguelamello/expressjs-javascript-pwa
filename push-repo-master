@@ -1,7 +1,8 @@
 #!/bin/sh
 Description=$1;
+Username=$USER;
 if [[ -z "$Description" ]]; then
-  Description="Push feito em `date +%Y-%m-%d" "%H:%M:%S` por $USER";
+  Description="`date +%Y-%m-%d" "%H:%M:%S` by ${Username^}";
 fi
 chmod -Rf 0755 .
 git add . && git commit -a -m "$Description";
