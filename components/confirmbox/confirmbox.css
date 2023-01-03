@@ -1,0 +1,89 @@
+@media screen {
+
+  .confirmbox-overlay {
+    display: none;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    position: fixed; /* Sit on top of the page content */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.1); /* Black background with opacity */
+    z-index: 1000; /* Specify a stack order in case you're using a different order for other elements */
+  }
+
+  /* Style the message box */
+  .confirmbox-container-blue {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border-top: 1px solid #2980B9;
+    border-right: 1px solid #2980B9;
+    border-bottom: 1px solid #2980B9;
+    border-left: 10px solid #2980B9;
+    width: auto; /* Could be more or less, depending on screen size */
+  }
+
+  .confirmbox-container-green {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border-top: 1px solid #27AE60;
+    border-right: 1px solid #27AE60;
+    border-bottom: 1px solid #27AE60;
+    border-left: 10px solid #27AE60;
+    width: auto; /* Could be more or less, depending on screen size */
+  }
+
+  .confirmbox-container-yellow {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border-top: 1px solid #F1C40F;
+    border-right: 1px solid #F1C40F;
+    border-bottom: 1px solid #F1C40F;
+    border-left: 10px solid #F1C40F;
+    width: auto; /* Could be more or less, depending on screen size */
+  }
+
+  .confirmbox-container-red {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 25px;
+    border-top: 1px solid #E74C3C;
+    border-right: 1px solid #E74C3C;
+    border-bottom: 1px solid #E74C3C;
+    border-left: 10px solid #E74C3C;
+    width: auto; /* Could be more or less, depending on screen size */
+  }
+
+  .confirmbox-message {
+    font: 0.8rem sans-serif;
+    color: #000000;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+  .confirmbox-ok-button {
+    font: 0.7rem sans-serif;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: pointer;
+  }
+
+  .confirmbox-cancel-button {
+    font: 0.7rem sans-serif;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+    cursor: pointer;
+  }
+
+}

@@ -1,0 +1,31 @@
+@media screen {
+
+  .toolbar {
+    background-color: #000080;
+    font-family: sans-serif;
+    color: #FFFFFF;
+    padding-top: 28px;
+    padding-right: 20px;
+    padding-bottom: 28px;
+    padding-left: 20px;
+  }
+
+  .toolbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .toolbar-container > div:nth-child(2) {
+    flex: 1; /* take up remaining space */
+  }
+
+  .toolbar-container > div:nth-child(4) {
+    padding-left: 15px;
+  }
+
+  .logo {
+    font-weight: 700;
+  }
+
+}

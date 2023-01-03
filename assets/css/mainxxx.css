@@ -1,0 +1,86 @@
+@media screen {
+
+	html, body {
+		background-color: #F4F4F4;
+		/*height: 100%;*/
+	}
+
+	textarea {
+		resize: none;
+	}
+
+  .app-toolbar {
+		background-color: #000080;
+		padding-top: 28px;
+		padding-right: 20px;
+		padding-bottom: 28px;
+		padding-left: 20px;
+	}
+
+  .app-text-white {
+	  color: #FFFFFF;
+	}
+
+	.app-inline {
+		display: inline;
+	}
+
+	.app-homeicon {
+		margin-left: 15px;
+	}
+
+	.app-align-center {
+		margin: auto;
+		padding: 7px;
+		text-align: center;
+	}
+
+	.app.align-right {
+		text-align: right;
+	}
+
+	.grow-width {
+		width: 100%;
+	}
+
+	.app-white {
+		color: #FFFFFF;
+	}
+
+	.app-cursor {
+		cursor: pointer;
+	}
+
+	.link {
+		cursor: pointer;
+	}
+
+	.link:hover {
+		text-decoration: underline;
+	}
+
+	.app-padding-top-20 {
+		padding-top: 20px;
+	}
+
+	.app-padding-bottom-20 {
+		padding-bottom: 20px;
+	}
+
+	.app-container {
+		padding: 20px;
+	}
+
+	.app-statusbar-bg {
+		background-color: #D5D8DC;
+	}
+
+	.app-padding-7px {
+		padding: 7px;
+	}
+
+}
+
+@media print {
+	* { display: none; }
+}

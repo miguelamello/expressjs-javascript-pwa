@@ -1,0 +1,54 @@
+"use strict";
+
+import React, { Suspense } from "react";
+import ReactDOM from "react-dom";
+import Session from './controllers/session';
+
+/*(() => { 
+
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  const session = Session._getStoredSession();
+  
+  if ( session ) {
+
+    Session._setLogged(1);
+    const Toolbar = React.lazy(() => import('./components/toolbar/toolbar.js'));
+    const Dashboard = React.lazy(() => import('./components/dashboard.js'));
+    root.render([<Toolbar />, <Dashboard />]);
+
+  } else {
+
+    const Toolbar = React.lazy(() => import('./components/toolbar/toolbar.js'));
+    const Login = React.lazy(() => import('./components/login.js'));
+    root.render([<Toolbar />, <Login />]);
+
+  }
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/dist/bin/service-worker.js').then(registration => {
+        console.log('SW registered: ', registration);
+      }).catch(registrationError => {
+        console.log('SW registration failed: ', registrationError);
+      });
+    });
+  }
+
+  const registerServiceWorker = async () => {
+    if ('serviceWorker' in navigator) {
+      try { 
+        const registration = await navigator.serviceWorker.register('servicework.js');
+      } catch (error) {}
+    } else {
+      UIkit.modal.alert(
+        `Seu navegador não suporta aplicativos offline. 
+        Tente abrir o Advosys em um navegador mais moderno.
+        Por enquanto você somente poderá utilizar o Advosys 
+        enquanto estiver conectado à internet.`
+      )
+    }
+  };
+
+  registerServiceWorker();
+
+})();*/

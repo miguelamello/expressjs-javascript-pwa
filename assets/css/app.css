@@ -1,0 +1,30 @@
+@media screen {
+
+  .show-cursor {
+    cursor: pointer;
+  }
+  
+  .action-button {
+    position: relative;
+    box-shadow: inset 0px 1px 0px 0px #0000FF;
+    background-color: #000080;
+    border: 1px solid #000080;
+    color: #FFFFFF; 
+    display: inline-block;
+    cursor: pointer;
+    padding: 8px 18px;
+    text-decoration: none;
+    border-radius: 5%;
+    font: sans-serif;
+  }
+
+  .action-button:active {
+    background-color:#0000FF;
+  }
+
+  .action-button:hover {
+    background:linear-gradient(to bottom, #0000FF 5%, #0000FF 100%);
+	  background-color:#0000FF;
+  }
+
+}
