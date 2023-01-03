@@ -23,7 +23,9 @@ class App {
   }
 
   #setObservers( index, module ) {
-    this.#observers[index] = module;
+    setTimeout(() => { //wait for module to be ready
+      this.#observers[index] = module;      
+    });
   }
 
   getObserver(index) {
@@ -36,8 +38,8 @@ class App {
       const container = document.getElementById(target); //gets the container
       container.innerHTML = module.getTemplate(); //applies the template to the container
       module.setObserver('App', this); //sets a reference to the App object
-      setTimeout(() => module.setListeners()); //sets dom listners on the loaded module
-      setTimeout(() => this.#setObservers(route, module)); //sets obervers on this module
+      module.setListeners(); //sets dom listeners on the loaded module
+      this.#setObservers(route, module); //sets obervers on this module
     });
   }
 

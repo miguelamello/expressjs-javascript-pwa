@@ -10,9 +10,12 @@ class Toolbar {
 
   #template = ``;
   #observers = [];
+  #homeButton;
+  #logoutButton;
 
   constructor() {
     this.#setTemplate();
+    this.#bondToDom();
     library.add([faHouse,faRightFromBracket]);
     dom.watch();
   }
@@ -37,31 +40,31 @@ class Toolbar {
     `;
   }
 
+  #bondToDom() {
+    setTimeout(() => {
+      this.#homeButton = document.getElementById('5qwq1caxwt');
+      this.#logoutButton = document.getElementById('cflrt6phmm');
+    });
+  }
+
   #getObserver(index) {
     return this.#observers[index];
   }
 
   setListeners() {
-
-    const homeButton = document.getElementById('5qwq1caxwt');
-
-    if (homeButton) {
-      homeButton.addEventListener('click', () => {
-        const App = this.#getObserver('App');
-        App.render('app-header','toolbar');
-      });
-    }
-    
-    const logoutButton = document.getElementById('cflrt6phmm');
-
-    if (logoutButton) {
-      logoutButton.addEventListener('click', () => { 
-        this.#logout(); 
-      });
-    }
-
-    return true;
-
+    setTimeout(() => { //wait for dom nodes creation
+      if (this.#homeButton) {
+        this.#homeButton.addEventListener('click', () => {
+          const App = this.#getObserver('App');
+          App.render('app-header','toolbar');
+        });
+      }
+      if (this.#logoutButton) {
+        this.#logoutButton.addEventListener('click', () => { 
+          this.#logout(); 
+        });
+      }
+    });
   }
 
   setObserver( index, module ) {
@@ -69,10 +72,8 @@ class Toolbar {
   }
 
   setIcons() {
-    const homeButton = document.getElementById('5qwq1caxwt');
-    const logoutButton = document.getElementById('cflrt6phmm');
-    homeButton.innerHTML = '<i class="fas fa-house show-cursor"></i>';
-    logoutButton.innerHTML = '<i class="fas fa-right-from-bracket show-cursor"></i>';
+    this.#homeButton.innerHTML = '<i class="fas fa-house show-cursor"></i>';
+    this.#logoutButton.innerHTML = '<i class="fas fa-right-from-bracket show-cursor"></i>';
   }
 
   getTemplate() {  return this.#template; }

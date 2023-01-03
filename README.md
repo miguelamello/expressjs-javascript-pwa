@@ -38,7 +38,21 @@ Once the PWA is complete, you will need to deploy it to a hosting service so tha
 
 **PWAs can be shared easily**: PWAs can be shared easily through a URL, which makes it easy for users to share the app with others. This can be especially useful for apps that are designed to be used by a group of people, such as a team or an organization.
 
-### 4) Notes:
+### 4) Infrastructure Stack
+
+- **Frontend**
+-- Pure JavaScript (ES2021)
+-- HTML 5
+-- CSS 3
+-- Standard Web APIs
+-- Webpack for bundling
+-- Babel for transpiling
+
+- **Backtend**
+-- Linux CENTOS 8
+-- Node 18
+
+### 5) Notes:
 
 - This application is for case study only, and may need a lot of adjustments to be fully funcional. 
 - The development focus now is towards the login screen to dashboard when user fully authenticated. 

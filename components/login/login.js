@@ -8,9 +8,11 @@ class Login {
 
   #template = ``;
   #observers = [];
+  #loginForm;
 
   constructor() { 
     this.#setTemplate();
+    this.#bondToDom();
   }
 
   #login( formData ) {
@@ -61,18 +63,24 @@ class Login {
     `;
   }
 
+  #bondToDom() {
+    setTimeout(() => {
+      this.#loginForm = document.getElementById('4976ha6hty');
+    }); 
+  }
+
   #getObserver(index) {
     return this.#observers[index];
   }
 
   setListeners() {
-    const form = document.getElementById('4976ha6hty');
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      this.#login(formData);
+    setTimeout(() => { //wait for dom nodes creation
+      this.#loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const formData = new FormData(this.#loginForm);
+        this.#login(formData);
+      });      
     });
-    return true;
   }
 
   setObserver( index, module ) {
