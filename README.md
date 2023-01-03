@@ -24,7 +24,19 @@ Once the PWA is complete, you will need to deploy it to a hosting service so tha
 
 - **Web performance optimization**: PWAs should be optimized for performance to ensure that they load quickly and provide a smooth user experience. This may involve techniques such as minimizing the size of assets, optimizing images, and reducing the number of requests made to the server.
 
-### Notes:
+#### There are several reasons why Progressive Web Applications (PWAs) may be considered better than native apps in certain situations:
+
+**PWAs are easy to discover and install**: Unlike native apps, which must be downloaded from an app store, PWAs can be accessed directly through a web browser and added to a user's home screen with a single click. This makes them easier to discover and install, especially for users who may not want to download an app from an app store.
+
+**PWAs are cross-platform**: PWAs work on any device that has a modern web browser, which means that they can be used on a wide range of platforms without the need for separate native apps. This makes them a good choice for developers who want to reach a wide audience without the need to build and maintain multiple native apps.
+
+**PWAs are easy to maintain and update**: Changes to a PWA can be made and deployed directly to the web server without the need for users to manually update their apps. This makes them easier to maintain and update, especially for apps that are updated frequently.
+
+**PWAs can work offline**: Service workers, a key technical foundation of PWAs, allow apps to work offline or in low-quality network environments by caching assets and data. This makes PWAs a good choice for apps that need to work in areas with poor or intermittent connectivity.
+
+**PWAs can be shared easily**: PWAs can be shared easily through a URL, which makes it easy for users to share the app with others. This can be especially useful for apps that are designed to be used by a group of people, such as a team or an organization.
+
+#### Notes:
 
 - This application is for case study only, and may need a lot of adjustments to be fully funcional. 
 
