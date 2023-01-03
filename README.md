@@ -2,6 +2,8 @@
 
 ## FULLY RESPONSIVE PWA (PROGRESSIVE WEB APPICATION)
 
+### 1) Introdution
+
 A Progressive Web Application (PWA) is a type of web application that uses modern web technologies to deliver a native app-like experience to users. PWAs are designed to be fast, reliable and engaging, with the ability to work offline and receive push notifications. They are built using web technologies such as HTML, CSS and JavaScript, and can be accessed through a web browser like any other website.
 
 The main benefits of PWAs are that they offer a seamless user experience across devices, are easy to discover and install, and can be used on any platform that has a modern web browser. They also have the advantage of being easy to maintain and update, as changes can be made and deployed directly to the web server without the need for users to manually update their apps.
@@ -10,7 +12,7 @@ To develop a PWA, you will need to design and build the app using web technologi
 
 Once the PWA is complete, you will need to deploy it to a hosting service so that it can be accessed by users. This may involve setting up a web server, configuring HTTPS, and optimizing the app for performance. Finally, you will need to promote the PWA and make it discoverable to users. This may involve creating a landing page, optimizing for search engines, and promoting the app through social media and other channels.
 
-#### Here are some of the technical foundations of a Progressive Web Application (PWA):
+### 2) Technical foundations
 
 - **Web app manifest**: This is a JSON file that provides metadata about the app, including the app name, icons, theme colors, and start URL. The manifest is used to control how the app appears when it is installed on a user's device, and is required for the app to be added to the user's home screen.
 
@@ -24,7 +26,7 @@ Once the PWA is complete, you will need to deploy it to a hosting service so tha
 
 - **Web performance optimization**: PWAs should be optimized for performance to ensure that they load quickly and provide a smooth user experience. This may involve techniques such as minimizing the size of assets, optimizing images, and reducing the number of requests made to the server.
 
-#### There are several reasons why Progressive Web Applications (PWAs) may be considered better than native apps in certain situations:
+### 3) Reasons for Progressive Web Applications (PWAs)
 
 **PWAs are easy to discover and install**: Unlike native apps, which must be downloaded from an app store, PWAs can be accessed directly through a web browser and added to a user's home screen with a single click. This makes them easier to discover and install, especially for users who may not want to download an app from an app store.
 
@@ -36,7 +38,7 @@ Once the PWA is complete, you will need to deploy it to a hosting service so tha
 
 **PWAs can be shared easily**: PWAs can be shared easily through a URL, which makes it easy for users to share the app with others. This can be especially useful for apps that are designed to be used by a group of people, such as a team or an organization.
 
-#### Notes:
+### 4) Notes:
 
 - This application is for case study only, and may need a lot of adjustments to be fully funcional. 
 
