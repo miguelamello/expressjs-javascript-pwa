@@ -10,6 +10,20 @@ To develop a PWA, you will need to design and build the app using web technologi
 
 Once the PWA is complete, you will need to deploy it to a hosting service so that it can be accessed by users. This may involve setting up a web server, configuring HTTPS, and optimizing the app for performance. Finally, you will need to promote the PWA and make it discoverable to users. This may involve creating a landing page, optimizing for search engines, and promoting the app through social media and other channels.
 
+#### Here are some of the technical foundations of a Progressive Web Application (PWA):
+
+- **Web app manifest**: This is a JSON file that provides metadata about the app, including the app name, icons, theme colors, and start URL. The manifest is used to control how the app appears when it is installed on a user's device, and is required for the app to be added to the user's home screen.
+
+- **Service workers**: Service workers are background scripts that enable PWAs to work offline and receive push notifications. They run separately from the web page and can intercept network requests, cache assets, and respond to events such as push notifications.
+
+- **HTTPS**: Secure HTTP (HTTPS) is required for all PWAs to ensure that the app and its data are transmitted securely. This is especially important for apps that handle sensitive information such as user login credentials.
+
+- **Responsive design**: PWAs should be designed to be responsive, meaning that they should work well on a variety of devices and screen sizes. This involves using responsive design techniques such as flexible layouts, media queries, and responsive images.
+
+- **Cross-browser compatibility**: PWAs should be tested and verified to work across a range of modern browsers. This will ensure that the app can be used by the largest possible audience.
+
+- **Web performance optimization**: PWAs should be optimized for performance to ensure that they load quickly and provide a smooth user experience. This may involve techniques such as minimizing the size of assets, optimizing images, and reducing the number of requests made to the server.
+
 ### Notes:
 
 - This application is for case study only, and may need a lot of adjustments to be fully funcional. 
