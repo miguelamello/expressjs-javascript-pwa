@@ -41,16 +41,16 @@ Once the PWA is complete, you will need to deploy it to a hosting service so tha
 ### 4) Infrastructure Stack
 
 - **Frontend**
--- Pure JavaScript (ES2021)
--- HTML 5
--- CSS 3
--- Standard Web APIs
--- Webpack for bundling
--- Babel for transpiling
+* Pure JavaScript (ES2021)
+* HTML 5
+* CSS 3
+* Standard Web APIs
+* Webpack for bundling
+* Babel for transpiling
 
 - **Backtend**
--- Linux CENTOS 8
--- Node 18
+* Linux CENTOS 8
+* Node 18
 
 ### 5) Notes:
 
