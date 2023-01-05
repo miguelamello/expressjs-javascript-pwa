@@ -21,7 +21,7 @@
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     width: auto; /* Could be more or less, depending on screen size */
-    font: 0.8rem sans-serif;
+    font-size: 0.8rem;
     color: #000000;
     border-top: 1px solid #2980B9;
     border-right: 1px solid #2980B9;
@@ -34,7 +34,7 @@
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     width: auto; /* Could be more or less, depending on screen size */
-    font: 0.8rem sans-serif;
+    font-size: 0.8rem;
     color: #000000;
     border-top: 1px solid #27AE60;
     border-right: 1px solid #27AE60;
@@ -47,7 +47,7 @@
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     width: auto; /* Could be more or less, depending on screen size */
-    font: 0.8rem sans-serif;
+    font-size: 0.8rem;
     color: #000000;
     border-top: 1px solid #E74C3C;
     border-right: 1px solid #E74C3C;
@@ -60,7 +60,7 @@
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
     width: auto; /* Could be more or less, depending on screen size */
-    font: 0.8rem sans-serif;
+    font-size: 0.8rem;
     color: #000000;
     border-top: 1px solid #F1C40F;
     border-right: 1px solid #F1C40F;

@@ -58,6 +58,24 @@ class Login {
               <button id="dhg8a8przl" type="submit" class="action-button" />Login</button>
             </div>
           </form>
+          <div id="1aff5t0iww" class="login-footer">
+            <div>Recuperar Senha</div>
+            <div>|</div>
+            <div>Criar Conta</div>
+            <div>|</div>
+            <div>Obter Suporte</div>
+          </div>
+          <div id="cj3tjk2ed1" class="login-social"> 
+            <div class="login-social-google">
+              <img src="./images/google-sign-in.png" />
+            </div>
+            <div class="login-social-apple">
+              <img src="./images/apple-sign-in.png" />
+            </div>
+            <div class="login-social-microsoft">
+              <img src="./images/microsoft-sign-in.png" />
+            </div>
+          </div>
         </div>
       </div>
     `;

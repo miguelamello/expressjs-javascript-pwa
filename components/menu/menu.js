@@ -86,10 +86,16 @@ class Menu {
 
   #logout() {
     ConfirmBox.show('Confirma logout?', 'red').then(() => {
+      const Toolbar = this.#getObserver('Toolbar');
       const App = this.#getObserver('App');
       App.render('app-body','login');
       this.hide();
+      Toolbar.hideMenu();
     }); 
+  }
+
+  setObservers( observers ) { console.log(observers);
+    this.#observers = observers;
   }
 
   setObserver( index, module ) {

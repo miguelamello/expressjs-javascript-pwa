@@ -41,7 +41,8 @@ class Toolbar {
   }
 
   #relayObservers(Menu) {
-    console.log(this.#getObserver('App'));
+    Menu.setObservers(this.#observers);
+    Menu.setObserver('Toolbar', this);
   }
 
   #getObserver(index) {

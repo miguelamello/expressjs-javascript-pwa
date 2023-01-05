@@ -70,7 +70,7 @@ module.exports = {
       version: '<%= process.env.VERSION %>', 
     }), 
 		new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/*', '!favicons/**'],  // delete all files and directories, except for the 'static' directory
+      cleanOnceBeforeBuildPatterns: ['**/*', '!favicons/**', '!images/**'],  // delete all files and directories, except for the 'static' directory
     })
 		/*new WorkboxPlugin.GenerateSW({
 			// these options encourage the ServiceWorkers to get in there fast

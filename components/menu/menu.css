@@ -37,7 +37,7 @@
   .menu-itens {
     padding-top: 15px;
     padding-bottom: 15px;
-    font: 1rem sans-serif;
+    font-size: 1rem;
   }
 
   .menu-itens > div {
@@ -45,7 +45,7 @@
     margin-bottom: 8px;
     padding-top: 3px; 
     padding-left: 3px;
-    font: 1rem sans-serif;
+    font-size: 1rem;
     border-left: 10px solid #6495ED;
     vertical-align: middle;
     cursor: pointer;
@@ -56,13 +56,13 @@
     margin-bottom: 8px;
     padding-top: 3px; 
     padding-left: 3px;
-    font: 1rem sans-serif;
+    font-size: 1rem;
     border-left: 10px solid #FFA500;
     cursor: pointer;
   }
 
   .poweroff {
-    font: 1rem sans-serif;
+    font-size: 1rem;
   }
 
 }
