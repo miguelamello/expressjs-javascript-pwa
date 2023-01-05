@@ -2,36 +2,30 @@
 
 import './toolbar.css';
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
-import { faHouse } from "@fortawesome/free-solid-svg-icons/faHouse";
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFromBracket";
-import ConfirmBox from '../confirmbox/confirmbox'; 
+import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
+import Menu from '../menu/menu'; 
 
 class Toolbar {
 
   #template = ``;
   #observers = [];
-  #homeButton;
-  #logoutButton;
+  #menuButton;
 
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
-    library.add([faHouse,faRightFromBracket]);
+    this.hideMenu();
+    this.#relayObservers(Menu);
+    library.add([faBars]);
     dom.watch();
-  }
-
-  #logout() {
-    ConfirmBox.show('Confirma logout?', 'red').then(() => {
-      const App = this.#getObserver('App');
-      App.render('app-body','login');
-    }); 
   }
 
   #setTemplate() {
     this.#template = `
       <div id="toolbar" class="toolbar">
         <div class="toolbar-container">
-          <div><span class="logo">ADVOSYS</span>&nbsp;|&nbsp;Software Jurídico</div>
+          <div id="2xxxhxkd70"><i class="fas fa-bars show-cursor" title="Clique para expandir o menu"></i></div>
+          <div><span class="logo">PWAAPP</span>&nbsp;|&nbsp;FULLY RESPONSIVE PWA</div>
           <div></div>
           <div id="5qwq1caxwt"></div>
           <div id="cflrt6phmm"></div>
@@ -42,9 +36,12 @@ class Toolbar {
 
   #bondToDom() {
     setTimeout(() => {
-      this.#homeButton = document.getElementById('5qwq1caxwt');
-      this.#logoutButton = document.getElementById('cflrt6phmm');
+      this.#menuButton = document.getElementById('2xxxhxkd70');
     });
+  }
+
+  #relayObservers(Menu) {
+    console.log(this.#getObserver('App'));
   }
 
   #getObserver(index) {
@@ -53,17 +50,22 @@ class Toolbar {
 
   setListeners() {
     setTimeout(() => { //wait for dom nodes creation
-      if (this.#homeButton) {
+      if (this.#menuButton) {
+        this.#menuButton.addEventListener('click', () => {
+          Menu.show();
+        });
+      }
+      /*if (this.#homeButton) {
         this.#homeButton.addEventListener('click', () => {
           const App = this.#getObserver('App');
-          App.render('app-header','toolbar');
+          App.render('app-body','dashboard');
         });
       }
       if (this.#logoutButton) {
         this.#logoutButton.addEventListener('click', () => { 
           this.#logout(); 
         });
-      }
+      }*/
     });
   }
 
@@ -71,9 +73,16 @@ class Toolbar {
     this.#observers[index] = module;
   }
 
-  setIcons() {
-    this.#homeButton.innerHTML = '<i class="fas fa-house show-cursor"></i>';
-    this.#logoutButton.innerHTML = '<i class="fas fa-right-from-bracket show-cursor"></i>';
+  showMenu() {
+    setTimeout(() => {
+      this.#menuButton.style.visibility = 'visible';
+    });
+  }
+
+  hideMenu() {
+    setTimeout(() => {
+      this.#menuButton.style.visibility = 'hidden';      
+    });
   }
 
   getTemplate() {  return this.#template; }

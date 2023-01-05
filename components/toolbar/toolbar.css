@@ -16,7 +16,11 @@
     align-items: center;
   }
 
-  .toolbar-container > div:nth-child(2) {
+  .toolbar-container > div:nth-child(1) {
+    padding-right: 5px;
+  }
+
+  .toolbar-container > div:nth-child(3) {
     flex: 1; /* take up remaining space */
   }
 

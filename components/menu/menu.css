@@ -1,0 +1,68 @@
+@media screen {
+
+  .menu {
+    display: none;
+    flex-direction: column;
+		justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+		width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    position: fixed; /* Sit on top of the page content */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #fefefe;
+    z-index: 999; /* Specify a stack order in case you're using a different order for other elements */
+  }
+
+  .menu-container {
+    display: flex;
+    flex-direction: column;
+		justify-content: flex-start;
+    align-items: flex-start;
+    align-content: flex-start;
+    padding-top: 27px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 27px;
+    width: 90%;
+  }
+
+  .menu-bars {
+    width: 100%;
+  }
+
+  .menu-itens {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font: 1rem sans-serif;
+  }
+
+  .menu-itens > div {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-top: 3px; 
+    padding-left: 3px;
+    font: 1rem sans-serif;
+    border-left: 10px solid #6495ED;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+
+  .menu-itens > div:hover {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    padding-top: 3px; 
+    padding-left: 3px;
+    font: 1rem sans-serif;
+    border-left: 10px solid #FFA500;
+    cursor: pointer;
+  }
+
+  .poweroff {
+    font: 1rem sans-serif;
+  }
+
+}

@@ -1,6 +1,6 @@
 "use strict";
 
-const production = (window.location.origin != 'http://localhost') ? true : false;
+const production = (window.location.origin != 'http://localhost:9000') ? true : false;
 let configObj = {};
 
 if (production) {

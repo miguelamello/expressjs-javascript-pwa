@@ -27,7 +27,7 @@ class Login {
         AlertMessage.hide();
         const App = this.#getObserver('App');
         const Toolbar = App.getObserver('toolbar');
-        Toolbar.setIcons();
+        Toolbar.showMenu();
         App.render('app-body','dashboard');
       } else {
         AlertMessage.show(data.message, 'red');
