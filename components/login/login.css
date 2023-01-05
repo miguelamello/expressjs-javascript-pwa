@@ -67,6 +67,14 @@
     padding-right: 5px;
   }
 
+  .login-footer span {
+    cursor: pointer;
+  }
+
+  .login-footer span:hover {
+    color: blue;
+  }
+
   .login-social {
     margin-top: 40px;
   }

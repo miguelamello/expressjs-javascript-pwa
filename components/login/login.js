@@ -9,8 +9,9 @@ class Login {
   #template = ``;
   #observers = [];
   #loginForm;
+  #support;
 
-  constructor() { 
+  constructor() {
     this.#setTemplate();
     this.#bondToDom();
   }
@@ -25,7 +26,7 @@ class Login {
     .then((data) => {   console.log(data); 
       if ( data.status ) {
         AlertMessage.hide();
-        const App = this.#getObserver('App');
+        const App = this.#getObserver('app');
         const Toolbar = App.getObserver('toolbar');
         Toolbar.showMenu();
         App.render('app-body','dashboard');
@@ -59,21 +60,21 @@ class Login {
             </div>
           </form>
           <div id="1aff5t0iww" class="login-footer">
-            <div>Recuperar Senha</div>
+            <div><span id="ry3rrk1k4a" title="Clique para recuperar sua senha.">Recuperar Senha</span></div>
             <div>|</div>
-            <div>Criar Conta</div>
+            <div><span id="l8n11xuem1" title="Clique para criar uma nova conta.">Criar Conta</span></div>
             <div>|</div>
-            <div>Obter Suporte</div>
+            <div><span id="b37ge60l4l" title="Clique para enviar uma mensagem ao suporte.">Obter Suporte</span></div>
           </div>
           <div id="cj3tjk2ed1" class="login-social"> 
             <div class="login-social-google">
-              <img src="./images/google-sign-in.png?v=1" />
+              <img src="./images/google-sign-in.png" />
             </div>
             <div class="login-social-apple">
-              <img src="./images/apple-sign-in.png?v=1" />
+              <img src="./images/apple-sign-in.png" />
             </div>
             <div class="login-social-microsoft">
-              <img src="./images/microsoft-sign-in.png?v=1" />
+              <img src="./images/microsoft-sign-in.png" />
             </div>
           </div>
         </div>
@@ -84,6 +85,7 @@ class Login {
   #bondToDom() {
     setTimeout(() => {
       this.#loginForm = document.getElementById('4976ha6hty');
+      this.#support = document.getElementById('b37ge60l4l');
     }); 
   }
 
@@ -97,8 +99,13 @@ class Login {
         e.preventDefault();
         const formData = new FormData(this.#loginForm);
         this.#login(formData);
-      });      
-    });
+      });
+      this.#support.addEventListener('click', (e) => {
+        const App = this.#getObserver('app');
+        const Support = App.getObserver('support');
+        (Support) ? Support.load() : App.render('app-body','support');
+      });  
+    }, 250);
   }
 
   setObserver( index, module ) {
@@ -106,6 +113,13 @@ class Login {
   }
 
   getTemplate() { return this.#template; }
+
+  load() { console.log(`login loaded`);
+    const container = document.getElementById('app-body'); //gets the container
+    container.innerHTML = this.getTemplate(); //applies the template to the container
+    this.#bondToDom();
+    this.setListeners();
+  }
 
 }
 

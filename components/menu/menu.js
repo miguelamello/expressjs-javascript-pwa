@@ -86,9 +86,10 @@ class Menu {
 
   #logout() {
     ConfirmBox.show('Confirma logout?', 'red').then(() => {
-      const Toolbar = this.#getObserver('Toolbar');
-      const App = this.#getObserver('App');
-      App.render('app-body','login');
+      const Toolbar = this.#getObserver('toolbar');
+      const App = this.#getObserver('app');
+      const Login = App.getObserver('login');
+      (Login) ? Login.load() : App.render('app-body','login');
       this.hide();
       Toolbar.hideMenu();
     }); 
@@ -111,6 +112,13 @@ class Menu {
   }
 
   getTemplate() {  return this.#template; }
+
+  load() { console.log(`menu loaded`);
+    const container = document.getElementById('app-body'); //gets the container
+    container.innerHTML = this.getTemplate(); //applies the template to the container
+    this.#bondToDom();
+    this.setListeners();
+  }
 
 }
 
