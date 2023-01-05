@@ -67,13 +67,13 @@ class Login {
           </div>
           <div id="cj3tjk2ed1" class="login-social"> 
             <div class="login-social-google">
-              <img src="./images/google-sign-in.png" />
+              <img src="./images/google-sign-in.png?v=1" />
             </div>
             <div class="login-social-apple">
-              <img src="./images/apple-sign-in.png" />
+              <img src="./images/apple-sign-in.png?v=1" />
             </div>
             <div class="login-social-microsoft">
-              <img src="./images/microsoft-sign-in.png" />
+              <img src="./images/microsoft-sign-in.png?v=1" />
             </div>
           </div>
         </div>

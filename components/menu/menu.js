@@ -94,7 +94,7 @@ class Menu {
     }); 
   }
 
-  setObservers( observers ) { console.log(observers);
+  setObservers( observers ) {
     this.#observers = observers;
   }
 

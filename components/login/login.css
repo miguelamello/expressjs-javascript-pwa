@@ -73,18 +73,18 @@
 
   .login-social-google > img {
     cursor: pointer;
-    height: 30px;
+    height: 40px;
   }
 
   .login-social-apple > img {
     cursor: pointer;
-    height: 30px;
+    height: 40px;
     margin-top: 10px;
   }
 
   .login-social-microsoft > img {
     cursor: pointer;
-    height: 30px;
+    height: 40px;
     margin-top: 10px;
   }
 
