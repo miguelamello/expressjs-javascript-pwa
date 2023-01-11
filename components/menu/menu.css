@@ -4,8 +4,7 @@
     display: none;
     flex-direction: column;
 		justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
+    align-items: stretch;
 		width: 100%; /* Full width (cover the whole page) */
     height: 100%; /* Full height (cover the whole page) */
     position: fixed; /* Sit on top of the page content */
@@ -21,28 +20,47 @@
     display: flex;
     flex-direction: column;
 		justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
-    padding-top: 27px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 27px;
-    width: 90%;
+    align-items: stretch;
+    padding: 30px;
+    height: 100%;
   }
 
-  .menu-bars {
+  .menu-container > div:nth-child(2) {
+    height: 30px;
+  }
+
+  .menu-header {
+    display: flex;
+    flex-direction: row;
+		justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%; 
+    /*padding-bottom: 15px;*/
+  }
+
+  .menu-body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+		justify-content: flex-start;
+    align-items: stretch;
     width: 100%;
   }
 
-  .menu-itens {
-    padding-top: 15px;
-    padding-bottom: 15px;
-    font-size: 1rem;
+  .menu-header > div:nth-child(2) {
+    flex: 1; /* take up remaining space */
   }
 
-  .menu-itens > div {
-    margin-top: 8px;
-    margin-bottom: 8px;
+  .menu-itens {
+    display: flex;
+    flex-direction: row;
+		justify-content: space-between;
+    align-items: center;
+  }
+ 
+  .menu-iten {
+    margin-top: 10px;
+    margin-bottom: 10px;
     padding-top: 3px; 
     padding-left: 3px;
     font-size: 1rem;
@@ -51,18 +69,32 @@
     cursor: pointer;
   }
 
-  .menu-itens > div:hover {
-    margin-top: 8px;
-    margin-bottom: 8px;
-    padding-top: 3px; 
-    padding-left: 3px;
-    font-size: 1rem;
-    border-left: 10px solid #FFA500;
-    cursor: pointer;
-  }
-
   .poweroff {
     font-size: 1rem;
+    text-align: center;
+    padding: 30px;
+  }
+
+}
+
+@media screen and (max-width: 320px) {
+
+  .menu-itens {
+    display: flex;
+    flex-direction: row;
+		justify-content: space-between;
+    align-items: center;
+  }
+ 
+  .menu-iten {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 3px; 
+    padding-left: 3px;
+    font-size: 0.8rem;
+    border-left: 10px solid #6495ED;
+    vertical-align: middle;
+    cursor: pointer;
   }
 
 }

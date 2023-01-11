@@ -15,12 +15,17 @@
 	.fullscreen {
 		display: flex;
 		flex-direction: column;
+		flex-wrap: nowrap;
+		justify-content: flex-start;
+		align-items: stretch;
 		height: 100%;
 	}
 	
 	.app-header {
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
+		align-items: stretch;
 		min-height: 74px;
 		background-color: #D5D8DC;
 	}

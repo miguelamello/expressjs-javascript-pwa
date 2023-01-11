@@ -26,30 +26,42 @@ class Menu {
     this.#template = `
       <div id="zpqocl0nca" class="menu">
         <div class="menu-container">
-          <div id="d4pk5lph5j" class="menu-bars">
-            <i class="fas fa-bars fa-rotate-90 show-cursor"></i>
+          <div id="d4pk5lph5j" class="menu-header">
+            <div>
+              <div id="r7qqialyp0">Miguel Mello</div>
+              <div id="r213ghv5gc">miguel@gmail.com</div>
+            </div>
+            <div></div>
+            <div><i class="fas fa-bars fa-rotate-90 show-cursor"></i></div>
           </div>
-          <div class="menu-itens">
-            <div>ANDAMENTOS</div>
-            <div>CAIXA</div>
-            <div>CAUSAS</div>
-            <div>CLIENTES</div>
-            <div>COMARCAS</div>
-            <div>DOCUMENTOS</div>
-            <div>INTIMAÇÕES</div>
-            <div>MODELOS</div>
-            <div>MONITORAMENTOS</div>
-            <div>NATUREZAS</div>
-            <div>PRAZOS</div>
-            <div>PROCESSOS</div>
-            <div>PUBLICAÇÕES</div>
-            <div>REGISTROS</div>
-            <div>USUARIOS</div>
-            <div>VARAS</div>
-          </div>
+          <div></div>
+          <div class="menu-body">
+            <div class="menu-itens">
+              <div>
+                <div class="menu-iten">ANDAMENTOS</div>
+                <div class="menu-iten">CAIXA</div>
+                <div class="menu-iten">CAUSAS</div>
+                <div class="menu-iten">CLIENTES</div>
+                <div class="menu-iten">COMARCAS</div>
+                <div class="menu-iten">DOCUMENTOS</div>
+                <div class="menu-iten">INTIMAÇÕES</div>
+                <div class="menu-iten">MODELOS</div>
+              </div>
+              <div>
+                <div class="menu-iten">MONITORAMENTOS</div>
+                <div class="menu-iten">NATUREZAS</div>
+                <div class="menu-iten">PRAZOS</div>
+                <div class="menu-iten">PROCESSOS</div>
+                <div class="menu-iten">PUBLICAÇÕES</div>
+                <div class="menu-iten">REGISTROS</div>
+                <div class="menu-iten">USUARIOS</div>
+                <div class="menu-iten">VARAS</div>
+              </div>
+            </div>
+          </div> 
           <div id="0cjj9m7agt" class="poweroff">
             <i class="fas fa-power-off"></i>
-            <span class="show-cursor">LOGOUT</span>
+            <span class="show-cursor">Sair</span>
           </div>
         </div>
       </div>

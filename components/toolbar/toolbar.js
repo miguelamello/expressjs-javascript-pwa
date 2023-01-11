@@ -14,7 +14,7 @@ class Toolbar {
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
-    this.hideMenu();
+    //this.hideMenu();
     this.#relayObservers(Menu);
     library.add([faBars]);
     dom.watch();
@@ -24,11 +24,14 @@ class Toolbar {
     this.#template = `
       <div id="toolbar" class="toolbar">
         <div class="toolbar-container">
-          <div id="2xxxhxkd70"><i class="fas fa-bars show-cursor" title="Clique para expandir o menu"></i></div>
-          <div><span class="logo">PWAAPP</span>&nbsp;|&nbsp;FULLY RESPONSIVE PWA</div>
+          <div class="slogan">
+            <span class="logo">PWAAPP</span>
+            &nbsp;|&nbsp;FULLY RESPONSIVE PWA
+          </div>
           <div></div>
-          <div id="5qwq1caxwt"></div>
-          <div id="cflrt6phmm"></div>
+          <div id="2xxxhxkd70">
+            <i class="fas fa-bars show-cursor" title="Clique para expandir o menu"></i>
+          </div>
         </div>
       </div>
     `;
