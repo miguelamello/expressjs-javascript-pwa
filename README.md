@@ -9,7 +9,7 @@ The main objective is building an PWA APP that does not use any external library
 
 The App shall be fast and responsive to any device screen. As a PWA App, it shall be working when no internet is present. The app shall be a Single Page Application where only the index.html is loaded to the client browser. Any other UI shall be rendered and loaded using pure ES2021 (Javascript 2021). 
 
-In the Backend only NODE shall be used, as the plataform shall be developed with ES2021 from side to side. Comunication between the App and the Server shall be made using a Single Point REST API. UI abstraction shall be completely independent from Backend implementation. The whole Application shall be asyncronous in order to deliver the fastest response to the end user. 
+In the Backend only NODE shall be used, as the plataform shall be developed with ES2021 from side to side. Comunication between the App and the Server shall be made using a Single Point REST API. UI abstraction shall be completely independent from Backend implementation. The whole Application shall be asyncronous in order to deliver the fastest response to the end user. All communications between client and server shall be encrypted using CryptoJS behind SSL Protocol.
 
 ### 1) Introdution
 
@@ -52,16 +52,20 @@ Once the PWA is complete, you will need to deploy it to a hosting service so tha
 The goal is not to use heavy frameworks or libraries that only make the application slow and difficult to maintain. The Web Standards already provide enough, and natively in browsers, to support various features. The focus is on making the most of these native browser features, while keeping the PWA Application fully compatible with browsers and devices that were 10 years old.
 
 - **Frontend**
-  - Pure JavaScript (ES2021)
+  - JavaScript (ES2021)
   - HTML 5
   - CSS 3
   - Standard Web APIs
+  - CryptoJS
   - Webpack for bundling
   - Babel for transpiling
 
 - **Backend**
-  - Linux CENTOS 8
+  - Linux CENTOS STREAM
   - Node 18
+  - CryptoJS
+  - MySQL
+  - Storage
 
 ### 5) Notes:
 
