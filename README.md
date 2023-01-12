@@ -2,6 +2,13 @@
 
 ## FULLY RESPONSIVE PWA (PROGRESSIVE WEB APPICATION)
 
+### LightHouse Score: 99%
+This PWA is scoring 99% of performance in LightHouse. 
+### Goals
+The main objective is building an PWA APP that does not use any external library or framework. Only standard Web Technologies already present in mobile/desktop browsers shall be used. Babel is used to transpile the code and make the App compatible to browsers up to 10 years behind today.
+
+The App shall be fast and responsive to any device screen. As a PWA App, it shall be working when no internet is present. The app shall be a Single Page Application where only the index.html is loaded to the client browser. Any other UI shall be rendered and loaded using pure ES2021 (Javascript 2021). 
+
 ### 1) Introdution
 
 A Progressive Web Application (PWA) is a type of web application that uses modern web technologies to deliver a native app-like experience to users. PWAs are designed to be fast, reliable and engaging, with the ability to work offline and receive push notifications. They are built using web technologies such as HTML, CSS and JavaScript, and can be accessed through a web browser like any other website.

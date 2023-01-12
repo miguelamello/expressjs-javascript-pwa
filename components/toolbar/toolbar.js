@@ -14,7 +14,7 @@ class Toolbar {
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
-    //this.hideMenu();
+    this.hideMenu();
     this.#relayObservers(Menu);
     library.add([faBars]);
     dom.watch();
