@@ -7,7 +7,9 @@ This PWA is scoring 99% of performance in LightHouse.
 ### Goals
 The main objective is building an PWA APP that does not use any external library or framework. Only standard Web Technologies already present in mobile/desktop browsers shall be used. Babel is used to transpile the code and make the App compatible to browsers up to 10 years behind today.
 
-The App shall be fast and responsive to any device screen. As a PWA App, it shall be working when no internet is present. The app shall be a Single Page Application where only the index.html is loaded to the client browser. Any other UI shall be rendered and loaded using pure ES2021 (Javascript 2021). In the Backend only NODE shall be used, as the plataform shall be developed with ES2021 from side to side. Comunication between the App and the Server shall be made using a Single Point REST API.
+The App shall be fast and responsive to any device screen. As a PWA App, it shall be working when no internet is present. The app shall be a Single Page Application where only the index.html is loaded to the client browser. Any other UI shall be rendered and loaded using pure ES2021 (Javascript 2021). 
+
+In the Backend only NODE shall be used, as the plataform shall be developed with ES2021 from side to side. Comunication between the App and the Server shall be made using a Single Point REST API. UI abstraction shall be completely independent from Backend implementation. 
 
 ### 1) Introdution
 
