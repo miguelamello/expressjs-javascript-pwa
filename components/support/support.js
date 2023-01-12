@@ -10,6 +10,7 @@ class Support {
   #observers = [];
   #supportForm;
   #homeButton;
+  #nameInput;
 
   constructor() {
     this.#setTemplate();
@@ -20,6 +21,8 @@ class Support {
     setTimeout(() => {
       this.#supportForm = document.getElementById('6zag7uzhui');
       this.#homeButton = document.getElementById('sz65h4rbd5');
+      this.#nameInput = document.getElementById('jrp1000j8h');
+      this.#setMount();
     }); 
   }
 
@@ -30,7 +33,7 @@ class Support {
           <div class="support-form-title">Abra um chamado de suporte.</div>
           <form id="6zag7uzhui" class="support-form">
           <div class="support-input-form-container">
-            <input type="text" placeholder="Nome:" autofocus required 
+            <input type="text" placeholder="Nome:" autofocus required id="jrp1000j8h" 
               title="Digite um nome válido." class="support-input-form"
               name="nome" maxlength="100" pattern=".{5,100}" minlength="5" />
             </div>
@@ -76,6 +79,11 @@ class Support {
         setTimeout(() => { AlertMessage.hide(); }, 3000);
       }
     });*/
+  }
+
+  /** setMount is called every time DOM is rendered. */
+  #setMount() {
+    this.#nameInput.focus();
   }
 
   setListeners() {

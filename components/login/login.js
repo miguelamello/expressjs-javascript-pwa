@@ -10,6 +10,7 @@ class Login {
   #observers = [];
   #loginForm;
   #support;
+  #emailInput;
 
   constructor() {
     this.#setTemplate();
@@ -37,6 +38,11 @@ class Login {
     });
   }
 
+  /** setMount is called every time DOM is rendered. */
+  #setMount() {
+    this.#emailInput.focus();
+  }
+
   #setTemplate() {
     this.#template = `
       <div id="login" class="login">
@@ -44,7 +50,7 @@ class Login {
           <div class="login-form-title">Faça seu login para acessar o sistema.</div>
           <form id="4976ha6hty" class="login-form">
             <div class="login-input-form-container">
-              <input type="email" placeholder="Email:" autofocus 
+              <input type="email" placeholder="Email:" autofocus id="l3wfqfd99w" 
               pattern="^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}$" 
               title="Um email válido é requerido. Exemplo: nome@gmail.com" 
               maxlength="100" required class="login-input-form" name="email" />
@@ -86,6 +92,8 @@ class Login {
     setTimeout(() => {
       this.#loginForm = document.getElementById('4976ha6hty');
       this.#support = document.getElementById('b37ge60l4l');
+      this.#emailInput = document.getElementById('l3wfqfd99w');
+      this.#setMount();
     }); 
   }
 

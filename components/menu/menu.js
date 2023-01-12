@@ -2,7 +2,7 @@
 
 import './menu.css'; 
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
-import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
+import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons/faPowerOff";
 import ConfirmBox from '../confirmbox/confirmbox'; 
 
@@ -18,7 +18,7 @@ class Menu {
     this.#setTemplate();
     this.#bondToDom();
     this.#setListeners();
-    library.add([faBars,faPowerOff]);
+    library.add([faXmark,faPowerOff]);
     dom.watch();
   }
 
@@ -32,7 +32,7 @@ class Menu {
               <div id="r213ghv5gc">miguel@gmail.com</div>
             </div>
             <div></div>
-            <div><i class="fas fa-bars fa-rotate-90 show-cursor"></i></div>
+            <div><i class="fas fa-xmark show-cursor"></i></div>
           </div>
           <div></div>
           <div class="menu-body">
