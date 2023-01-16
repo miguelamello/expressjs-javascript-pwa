@@ -10,6 +10,7 @@
     "cleave.js": "^1.6.0",
     "crypto-js": "^4.1.1",
     "jquery": "^3.6.1",
+    "jsonrpc-lite": "^2.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "regenerator-runtime": "^0.13.11",
