@@ -4,10 +4,12 @@ const production = (window.location.origin != 'http://localhost:9000') ? true : 
 let configObj = {};
 
 if (production) {
-  configObj = {};
+  configObj = {
+    apiurl: 'http://api.advosys.com.br'
+  };
 } else {
   configObj = {
-    apiurl: 'http://api.advosys/'
+    apiurl: 'http://api.advosys'
   };
 }
 
