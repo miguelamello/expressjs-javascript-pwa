@@ -11,7 +11,10 @@ class Dispatcher {
   #lastError;
 
   constructor() {
-    this.#lastError = { error: true, message: "Unknown error." };
+    this.#lastError = { 
+      error: true, 
+      message: "Unknown error." 
+    };
   }
 
   /*
@@ -26,24 +29,53 @@ class Dispatcher {
       let jsonObj = JSON.parse( jsonString );
       return jsonObj;
     } catch (e) {
-      this.#lastError = { error: true, message: "Invalid json object." };
+      this.#lastError = { 
+        error: true, 
+        message: "Invalid json object." 
+      };
       return false;
     }
   }
 
+  /*
+    #validateIndexes( jsonObj )
+    Private method that validates the indexes of the 
+    JSON object argument. JSON object must follow the syntax:
+
+    {
+      "module": "moduleName",
+      "method": "methodName",
+      "params": {}
+    }
+  */
   #validateIndexes( jsonObj ) {
     const requiredProperties = ['module', 'method', 'params'];
     let hasAllProperties = true;
     for (let i = 0; i < requiredProperties.length; i++) {
       if (!jsonObj.hasOwnProperty(requiredProperties[i])) {
         hasAllProperties = false;
-        this.#lastError = { error: true, message: `Required named index \'${requiredProperties[i]}\' is missing on the sent json.` };
+        this.#lastError = { 
+          error: true, 
+          message: `Required named index \'${requiredProperties[i]}\' 
+                    is missing on the sent json.`
+        };
         break;
       }
     }
     return hasAllProperties;
   }
 
+  /*
+    #validateValues( jsonObj )
+    Private method that validates the values of the 
+    JSON object argument. JSON object must follow the syntax:
+
+    {
+      "module": "moduleName", //Must be a string.
+      "method": "methodName", //Must be a string.
+      "params": {} //Must be a object
+    }
+  */
   #validateValues( jsonObj ) {
     let isValid = true;
     const requiredProperties = {
@@ -52,17 +84,49 @@ class Dispatcher {
       'params': 'object'
     };
     for (const prop in requiredProperties) {
-      if (requiredProperties[prop] === 'object' && Array.isArray(jsonObj[prop])) {
-        isValid = false;
-        this.#lastError = { error: true, message: `${prop} must be of type object.` };
-        break;
+      if (requiredProperties[prop] === 'object') {
+        if (Object.prototype.toString.call(jsonObj[prop]) !== '[object Object]') {
+          isValid = false;
+          this.#lastError = { 
+            error: true, 
+            message: `${prop} must be of type object Object.` 
+          };
+          break;
+        }
       } else if (typeof jsonObj[prop] !== requiredProperties[prop]) {
         isValid = false;
-        this.#lastError = { error: true, message: `${prop} must be of type ${requiredProperties[prop]}.` };
+        this.#lastError = { 
+          error: true, 
+          message: `${prop} must be of type ${requiredProperties[prop]}.` 
+        };
         break;
       }
     }
     return isValid;
+  }
+
+  #runCommand( jsonObj ) {
+    let data;
+    try {
+      let Callee = require(`./${jsonObj.module.toLowerCase()}`);
+      let calleeInstance = new Callee();
+      try {
+        data = calleeInstance[jsonObj.method].call(calleeInstance, jsonObj.params);
+      } catch (e) {
+        this.#lastError = { 
+          error: true, 
+          message: `Method '${jsonObj.method}' does not exist. Follow the systax from documentation.` 
+        };
+        return data;
+      }
+    } catch (e) {
+      this.#lastError = { 
+        error: true, 
+        message: `Module '${jsonObj.module}' does not exist. Follow the syntax from documentation.` 
+      };
+      return data;
+    }
+    return data;
   }
 
   /*
@@ -72,20 +136,17 @@ class Dispatcher {
     if any problem shows up.
   */
   getDispacher( jsonString ) {
-    let jsonObj, moduleObj; 
+    let jsonObj, data; 
     if ( jsonObj = this.#validateJsonString( jsonString ) ) {
       if ( this.#validateIndexes( jsonObj ) ) {
         if ( this.#validateValues( jsonObj ) ) {
-          return JSON.stringify(jsonObj);
-        } else {
-          return JSON.stringify(this.#lastError);
+          if ( data = this.#runCommand( jsonObj ) ) {
+            return JSON.stringify( data );
+          }
         }
-      } else {
-        return JSON.stringify(this.#lastError);
       }
-    } else {
-      return JSON.stringify(this.#lastError);
     }
+    return JSON.stringify(this.#lastError);
   }
 
 }

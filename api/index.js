@@ -3,18 +3,27 @@
 /*
   This is a Single Endpoint API accepting 
   only POST method with a JSON object 
-  in the message body. JSON object must 
-  follow the syntax:
+  in the message body. 
+  
+  JSON object must follow the syntax:
 
   {
     "module": "moduleName",
     "method": "methodName",
-    "params": "{}"
+    "params": {}
   }
 
   An Dispacher Class will process the JSON 
   object and return the data accordingly  
   or rising an error if something is misplaced.
+
+  JSON data object will follow the syntax:
+
+  {
+    "status": true,
+    "message": "", 
+    "data": []
+  }
 */
 
 const http = require('http');
