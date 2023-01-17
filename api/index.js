@@ -27,7 +27,6 @@
 */
 
 const http = require('http');
-const Dispatcher = require('./modules/dispatcher');
 
 try {
   http.createServer((request, response) => {
@@ -43,8 +42,9 @@ try {
         jsonString.push(chunk);
       }).on('end', () => {
         jsonString = Buffer.concat(jsonString).toString();
-        let InstanceDispatcher = new Dispatcher();
-        let feedback = InstanceDispatcher.getDispacher(jsonString);
+        const Dispatcher = require('./modules/dispatcher');
+        let IDispatcher = new Dispatcher();
+        let feedback = IDispatcher.getDispacher(jsonString);
         response.end(feedback);
       });
     } else {

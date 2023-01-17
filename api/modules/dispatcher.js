@@ -108,10 +108,10 @@ class Dispatcher {
   #runCommand( jsonObj ) {
     let data;
     try {
-      let Callee = require(`./${jsonObj.module.toLowerCase()}`);
-      let calleeInstance = new Callee();
+      const Callee = require(`./${jsonObj.module.toLowerCase()}`);
+      let ICallee = new Callee();
       try {
-        data = calleeInstance[jsonObj.method].call(calleeInstance, jsonObj.params);
+        data = ICallee[jsonObj.method].call(ICallee, jsonObj.params);
       } catch (e) {
         this.#lastError = { 
           error: true, 
