@@ -16,7 +16,7 @@ class MySql {
 
   constructor() {
     const configObj = require('./apiconfig');
-    this.#mysql = require('mysql2');
+    this.#mysql = require('mysql2/promise');
     this.#host = configObj.host;
     this.#user = configObj.user;
     this.#password = configObj.password;
@@ -37,10 +37,17 @@ class MySql {
     });
   }
 
-  query( $sql = '' ) {
+  query( sql = '' ) {
     if ( this.#pool ) {
       return 'ok';
     }
+  }
+
+  async select( sql, params ) {
+    let fnResults = [];
+    if ( !this.#pool ) { return fnResults }
+    const [rows, fields] = await this.#pool.execute( sql, params ); 
+    return rows;
   }
 
 }

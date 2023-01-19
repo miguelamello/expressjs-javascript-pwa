@@ -5,22 +5,25 @@
 */
 class Login {
 
-  #lastError;
   #db;
+  #common;
 
   constructor() {
+    const Common = require('./common');
     const MySql = require('./mysql');
     this.#db = new MySql();
-    this.#lastError = { error: true, message: "Unknown error." };
+    this.#common = new Common();
   }
 
-  doLogin( params ) {
-    return {
-      status: true, 
-      message: "",
-      data: [this.#db.query()]
-    };
-    /*return params;*/
+  async doLogin( params ) {
+    let load = { status: true, message: "1", data: [] };
+    if ( !params.email ) { data.status = false; data.message = "Email is required."; }
+    if ( !params.password ) { data.status = false; data.message = "Password is required."; }
+    if ( !this.#common.isEmail( params.email ) ) { data.status = false; data.message = "Email is invalid. Ex: username@gmail.com"; }
+    if ( !this.#common.isPassword( params.password ) ) { data.status = false; data.message = "Password is invalid. Must be a 8 digit number. Ex: 86938002"; }
+    let result = await this.#db.select('SELECT * FROM `login` WHERE `email_login` = ?', [ params.email ]);      
+    load.data = result;
+    return load;
   }
 
 }

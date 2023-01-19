@@ -44,8 +44,19 @@ try {
         jsonString = Buffer.concat(jsonString).toString();
         const Dispatcher = require('./modules/dispatcher');
         let IDispatcher = new Dispatcher();
-        let feedback = IDispatcher.getDispacher(jsonString);
-        response.end(feedback);
+        IDispatcher.getDispacher(jsonString)
+        .then( (result) => response.end( result ) )
+        .catch( (err) => { 
+            let feedback = { 
+              error: true, 
+              message: 'Internal API error. Try Again later. Please report to API Admin.' 
+            };
+            //Returns a error message to the client.
+            response.end(JSON.stringify(feedback));
+            //Must implement Error Reporting and Logging.
+            console.log(err) 
+          } 
+        );
       });
     } else {
       let feedback = { error: true, message: "Invalid http method or url." };
@@ -53,7 +64,7 @@ try {
       response.end(JSON.stringify(feedback)); 
     }
   }).listen(3000);
-} catch (e) {
+} catch (err) {
   //Must implement Error Reporting and Logging.
   console.error(err); 
 }

@@ -28,7 +28,7 @@ class Dispatcher {
     try {
       let jsonObj = JSON.parse( jsonString );
       return jsonObj;
-    } catch (e) {
+    } catch (err) {
       this.#lastError = { 
         error: true, 
         message: "Invalid json object." 
@@ -105,25 +105,43 @@ class Dispatcher {
     return isValid;
   }
 
-  #runCommand( jsonObj ) {
+  async #runCommand( jsonObj ) {
     let data;
     try {
       const Callee = require(`./${jsonObj.module.toLowerCase()}`);
       let ICallee = new Callee();
       try {
-        data = ICallee[jsonObj.method].call(ICallee, jsonObj.params);
-      } catch (e) {
-        this.#lastError = { 
-          error: true, 
-          message: `Method '${jsonObj.method}' does not exist. Follow the systax from documentation.` 
-        };
+        data = await ICallee[jsonObj.method].call(ICallee, jsonObj.params);
+      } catch (err) {
+        if (err.code) {
+          //Must implement Error Reporting and Logging.
+          console.error(err); 
+          this.#lastError = { 
+            error: true, 
+            message: `Internal API error. Try Again later. Please report to API Admin.` 
+          };
+        } else {
+          this.#lastError = { 
+            error: true, 
+            message: `Method '${jsonObj.method}' does not exist. Follow the systax from documentation.` 
+          };
+        }
         return data;
       }
-    } catch (e) {
-      this.#lastError = { 
-        error: true, 
-        message: `Module '${jsonObj.module}' does not exist. Follow the syntax from documentation.` 
-      };
+    } catch (err) {
+      if (err.code) {
+        //Must implement Error Reporting and Logging.
+        console.error(err); 
+        this.#lastError = { 
+          error: true, 
+          message: `Internal API error. Try Again later. Please report to API Admin.` 
+        };
+      } else {
+        this.#lastError = { 
+          error: true, 
+          message: `Module '${jsonObj.module}' does not exist. Follow the syntax from documentation.` 
+        };
+      }
       return data;
     }
     return data;
@@ -135,12 +153,12 @@ class Dispatcher {
     and returns the resulting data or a error 
     if any problem shows up.
   */
-  getDispacher( jsonString ) {
+  async getDispacher( jsonString ) {
     let jsonObj, data; 
     if ( jsonObj = this.#validateJsonString( jsonString ) ) {
       if ( this.#validateIndexes( jsonObj ) ) {
         if ( this.#validateValues( jsonObj ) ) {
-          if ( data = this.#runCommand( jsonObj ) ) {
+          if ( data = await this.#runCommand( jsonObj ) ) {
             return JSON.stringify( data );
           }
         }
