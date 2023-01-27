@@ -26,18 +26,18 @@ The application is simple to install. Below is a suggestion of steps to follow:
 
 1) Clone the repository in a directory on your localhost or remotehost.
 
-$ cd dev-projects
-$ git clone https://github.com/miguelamello/node-calculator
+$ cd dev-projects <br>
+$ git clone https://github.com/miguelamello/node-calculator <br>
 
 2) Install all packages and dependencies needed to run the application.
 
-$ cd node-calculator
-$ npm install
+$ cd node-calculator <br>
+$ npm install <br>
 
 3) You have to install globally the package `ts-node`. 
 ts-node is needed due to Typescript to be supported by Node.js
 
-$ sudo npm i ts-node -g
+$ sudo npm i ts-node -g <br>
 
 Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/local/bin/ts-node/usr/local/bin/ts-node`. Under Windows you should look for how running Typescript applications under Node.js.
 
