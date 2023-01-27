@@ -20,3 +20,27 @@ We can highlight the following characteristics:
 * Versatility
 * Accuracy
 
+## Installing
+
+The application is simple to install. Below is a suggestion of steps to follow:
+
+1) Clone the repository in a directory on your localhost or remotehost.
+
+$ cd dev-projects
+$ git clone https://github.com/miguelamello/node-calculator
+
+2) Install all packages and dependencies needed to run the application.
+
+$ cd node-calculator
+$ npm install
+
+3) You have to install globally the package `ts-node`. 
+ts-node is needed due to Typescript to be supported by Node.js
+
+$ sudo npm i ts-node -g
+
+Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/local/bin/ts-node/usr/local/bin/ts-node`. Under Windows you should look for how running Typescript applications under Node.js.
+
+
+## Executing
+
