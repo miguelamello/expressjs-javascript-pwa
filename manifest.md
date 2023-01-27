@@ -35,7 +35,7 @@ The application is simple to install. Below is a suggestion of steps to follow:
 &emsp;`$ npm install` <br>
 
 3) You should install globally the package `ts-node`. 
-This package is needed for running a Typescript script using a `shebang`.
+This package is needed for running a Typescript script under Node.js without transpaling to Javascript before. `ts-node` makes the compilation at runtime and allows Node.js understand Typescript.
 More about this ahead.
 
 &emsp;`$ sudo npm i ts-node -g` <br> 
@@ -49,10 +49,12 @@ Running `node-calculator` is extremely simple. Just call the main application sc
 
 &emsp;`$ ./server.ts` <br>
 
-Now it's where the `shebang` markup in the first line of the `server.ts` contents is used for. 
+Now it's where the `ts-node` binary comes in help. You can look for a `shebang` markup in the first line of the `server.ts` contents. This calls `ts-node` compilation at runtime and we can just run Typescript directly. 
 
-`#!/usr/local/bin/ts-node`
+`#!/usr/local/bin/ts-node` //shebang makup
 
-`ts-node` will run the Typescript script for us without the need to call `node server.ts`.
+Well, if you want, you can just search for how to compile Typescript before running in Node.js.
+
+
 
 
