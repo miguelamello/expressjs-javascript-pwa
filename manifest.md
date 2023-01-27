@@ -49,7 +49,7 @@ Running `node-calculator` is extremely simple. Just call the main application sc
 
 &emsp;`$ ./server.ts` <br>
 
-Now the `shebang` markup in the first line of the `server.ts` contents is used for. 
+Now it's where the `shebang` markup in the first line of the `server.ts` contents is used for. 
 
 `#!/usr/local/bin/ts-node`
 
