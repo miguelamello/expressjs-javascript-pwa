@@ -39,7 +39,7 @@ ts-node is needed due to Typescript to be supported by Node.js
 
 &emsp;`$ sudo npm i ts-node -g` <br> 
 
-Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/local/bin/ts-node/usr/local/bin/ts-node`. Under Windows you should look for how running Typescript applications under Node.js.
+Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/local/bin/ts-node`. Under Windows you should look for how running Typescript applications under Node.js.
 
 
 ## Executing
