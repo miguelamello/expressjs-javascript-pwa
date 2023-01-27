@@ -53,7 +53,7 @@ Now it's where the `ts-node` binary comes in help. You can look for a `shebang` 
 
 `#!/usr/local/bin/ts-node` `//shebang makup`
 
-Obs: The path of `ts-node` binary can be different in your host. Pay attention to that. ;-)
+Obs: The path of `ts-node` binary can be different in your host. Pay attention to that. ;-)<br>
 Well, if you want, you can just search for how to compile Typescript before running in Node.js, and run the main script under `node` binary. 
 
 `$ node server.ts` 
