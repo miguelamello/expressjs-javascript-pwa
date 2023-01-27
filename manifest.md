@@ -58,7 +58,7 @@ Well, if you want, you can just search for how to compile Typescript before runn
 
 `$ node server.ts` 
 
-For testing, this is enough. You should see message in the terminal console like:
+For testing, this is enough. You should see a message in the terminal console like:
 
 `Listening to http://your-hostname:3000/transactions/`
 
