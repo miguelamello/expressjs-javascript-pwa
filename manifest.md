@@ -3,7 +3,7 @@
 This microservice allows an easily conversion between country currencies. Currency rates are updated frequently and applied to the conservion calculation. All the information relevant to 
 this microservice is provided in this documentation. 
 
-## objective
+## Objective
 
 The main objective of this microservice is to offer a fast and effective way of converting between foreign currencies. The application is developed to be fast in performing the task. Following the microservice guidelines, the application is focused on executing a limited number of actions, and executing these actions in the most efficient way possible.
 
@@ -34,8 +34,9 @@ The application is simple to install. Below is a suggestion of steps to follow:
 &emsp;`$ cd node-calculator` <br>
 &emsp;`$ npm install` <br>
 
-3) You have to install globally the package `ts-node`. 
-ts-node is needed due to Typescript to be supported by Node.js
+3) You should install globally the package `ts-node`. 
+ts-node is needed for running a Typescript script using a `shebang`.
+More about this ahead.
 
 &emsp;`$ sudo npm i ts-node -g` <br> 
 
@@ -43,4 +44,15 @@ Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/loca
 
 
 ## Executing
+
+Running `node-calculator` is extremely simple. Just call the main application script `server.ts` under the `node-calculator` directory. 
+
+&emsp;`$ ./server.ts` <br>
+
+Now the `shebang` markup in the first line of the `server.ts` contents is used for. 
+
+`#!/usr/local/bin/ts-node`
+
+`ts-node` will run the Typescript script for us without the need to call `node server.ts`.
+
 
