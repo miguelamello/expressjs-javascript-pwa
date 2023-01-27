@@ -44,10 +44,8 @@ class MySql {
   }
 
   async select( sql, params ) {
-    let fnResults = [];
-    if ( !this.#pool ) { return fnResults }
-    const [rows, fields] = await this.#pool.execute( sql, params ); 
-    return rows;
+    await this.#pool.execute( sql, params )
+    .then( (rows) => rows );
   }
 
 }
