@@ -7,4 +7,16 @@ this microservice is provided in this documentation.
 
 The main objective of this microservice is to offer a fast and effective way of converting between foreign currencies. The application is developed to be fast in performing the task. Following the microservice guidelines, the application is focused on executing a limited number of actions, and executing these actions in the most efficient way possible.
 
-## 
+## Features
+
+The application is developed in Node.js with Typescript, which ensures robustness and resilience in the event of runtime errors. Node.js is known for its speed, security and versatility. Typescript is known as a language that values good programming practice, which reduces or even eliminates code execution errors.
+
+We can highlight the following characteristics:
+
+* Robustness
+* Resilience
+* speed
+* Safety
+* Versatility
+* Accuracy
+
