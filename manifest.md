@@ -62,8 +62,16 @@ For testing, this is enough. You should see a message in the terminal console li
 
 `Listening to http://your-hostname:3000/transactions/`
 
-Where `your-hostname` should be the local name given to your host. 
-Just navigate to the URL given... and you shoul be able to operate the service.
+Where `your-hostname` should be the local name given to your host.<br>
+Just navigate to the URL given... and you should be able to operate the service.<br>
+
+You can also change the service port.<br>
+Look for the following line in the first line of `server.ts` script.<br>
+
+`const port = 3000;`
+
+Just change the `port` constant to any integer between 1000 to 65535, which is not assigned to another TCP services. 
+
 
 
 
