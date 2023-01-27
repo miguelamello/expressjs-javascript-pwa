@@ -58,6 +58,14 @@ Well, if you want, you can just search for how to compile Typescript before runn
 
 `$ node server.ts` 
 
+For testing, this is enough. You should see message in the terminal console like:
+
+`Listening to http://your-hostname:3000/transactions/`
+
+Where `your-hostname` should be the local name given to your host. 
+Just navigate to the URL given... and you shoul be able to operate the service.
+
+
 
 
 
