@@ -35,7 +35,7 @@ The application is simple to install. Below is a suggestion of steps to follow:
 &emsp;`$ npm install` <br>
 
 3) You should install globally the package `ts-node`. 
-ts-node is needed for running a Typescript script using a `shebang`.
+This package is needed for running a Typescript script using a `shebang`.
 More about this ahead.
 
 &emsp;`$ sudo npm i ts-node -g` <br> 
