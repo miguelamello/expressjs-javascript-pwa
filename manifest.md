@@ -27,7 +27,7 @@ The application is simple to install. Below is a suggestion of steps to follow:
 1) Clone the repository in a directory on your localhost or remotehost.
 
 &emsp;`$ cd dev-projects` <br>
-&emsp;`$ git clone https://github.com/miguelamello/node-calculato` <br>
+&emsp;`$ git clone https://github.com/miguelamello/node-calculator` <br>
 
 2) Install all packages and dependencies needed to run the application.
 
@@ -35,7 +35,7 @@ The application is simple to install. Below is a suggestion of steps to follow:
 &emsp;`$ npm install` <br>
 
 3) You should install globally the package `ts-node`. 
-This package is needed for running a Typescript script under Node.js without transpaling to Javascript before. `ts-node` makes the compilation at runtime and allows Node.js understand Typescript.
+This package is needed for running a Typescript script under Node.js without transpiling to Javascript before. `ts-node` makes the compilation at runtime and allows Node.js understand Typescript.
 More about this ahead.
 
 &emsp;`$ sudo npm i ts-node -g` <br> 
