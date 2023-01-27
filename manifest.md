@@ -51,7 +51,7 @@ Running `node-calculator` is extremely simple. Just call the main application sc
 
 Now it's where the `ts-node` binary comes in help. You can look for a `shebang` markup in the first line of the `server.ts` contents. This calls `ts-node` compilation at runtime and we can just run Typescript directly. 
 
-`#!/usr/local/bin/ts-node` //shebang makup
+`#!/usr/local/bin/ts-node` `//shebang makup`
 
 Well, if you want, you can just search for how to compile Typescript before running in Node.js.
 
