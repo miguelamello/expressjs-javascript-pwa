@@ -67,7 +67,7 @@ Well, if you want, you can just search for how to compile Typescript before runn
 
 For testing, this is enough. You should see a message in the terminal console like:
 
-`Listening to http://your-hostname:3000/transactions/`
+`Listening to http://localhost:3000/transactions/`
 
 Where `your-hostname` should be the local name given to your host.<br>
 Just navigate to the URL given... and you should be able to operate the service.<br>
