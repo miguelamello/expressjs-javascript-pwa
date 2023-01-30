@@ -15,7 +15,7 @@ We can highlight the following characteristics:
 
 * Robustness
 * Resilience
-* speed
+* Speed
 * Safety
 * Versatility
 * Accuracy
@@ -27,7 +27,7 @@ The application is simple to install. Below is a suggestion of steps to follow:
 1) Clone the repository in a directory on your localhost or remotehost.
 
 &emsp;`$ cd dev-projects` <br>
-&emsp;`$ git clone https://github.com/miguelamello/node-calculator` <br>
+&emsp;`$ git clone https://github.com/miguelamello/currency-calculator` <br>
 
 2) Install all packages and dependencies needed to run the application.
 
