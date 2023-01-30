@@ -78,6 +78,18 @@ Look for the following line in the first line of `server.ts` script.<br>
 
 Just change the `port` constant to any integer between 1024 to 65535, which is not normally assigned to another TCP service. However, pay attention since you may have an TCP service running on the port you choose. ;-)
 
+## Testing
+
+Testing the microservice for checking its properly functioning is crucial.
+
+Follow those steps to test:
+
+1) Open a command terminal on `~/currency-calculator`. Aka the project directory.
+2) `cd __tests__` <br> Aka the directory where tests scripts are.
+3) Execute the command `./jest` to run all the available tests.
+
+Obs: You can run tests individually by executing the command `npx jest target-test-file.ts`. Where `target-test-file.ts` you can fing inside `__tests__` directory. 
+
 ## Disclaimer
 
 This microservice uses the versioning method known as "Rolling Release". Which means that the version in the repository is always the most current, with older versions being registered in the repository's history. We understand that this is a simple and effective method of versioning, since it eliminates a complex and very likely unnecessary task of controlling the specific version of the software.
