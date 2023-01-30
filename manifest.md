@@ -1,4 +1,4 @@
-## CURRENCY CONVERSION MICROSERVICE
+## CURRENCY CONVERSION CALCULATOR MICROSERVICE
 
 This microservice allows an easily conversion between country currencies. Currency rates are updated frequently and applied to the conservion calculation. All the information relevant to 
 this microservice is provided in this documentation. 
