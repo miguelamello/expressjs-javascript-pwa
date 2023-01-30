@@ -42,7 +42,6 @@ More about this ahead.
 
 Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/local/bin/ts-node`. Under Windows you should look for how running Typescript applications under Node.js. I recommend you install `ts-node` in the global npm. 
 
-
 ## Executing
 
 Running `currency-calculator` is extremely simple, but first adjust the `hostname`and `port` in the `server.ts` script. 
@@ -79,12 +78,9 @@ Look for the following line in the first line of `server.ts` script.<br>
 
 Just change the `port` constant to any integer between 1024 to 65535, which is not normally assigned to another TCP service. However, pay attention since you may have an TCP service running on the port you choose. ;-)
 
+## Disclaimer
 
+This microservice uses the versioning method known as "Rolling Release". Which means that the version in the repository is always the most current, with older versions being registered in the repository's history. We understand that this is a simple and effective method of versioning, since it eliminates a complex and very likely unnecessary task of controlling the specific version of the software.
 
-
-
-
-
-
-
+Any question, suggestion, information can be directed to developers@currency-calculator.space
 
