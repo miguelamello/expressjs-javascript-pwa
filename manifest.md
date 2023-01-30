@@ -45,7 +45,14 @@ Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/loca
 
 ## Executing
 
-Running `currency-calculator` is extremely simple. Just call the main application script `server.ts` under the `currency-calculator` directory. 
+Running `currency-calculator` is extremely simple, but first adjust the `hostname`and `port` in the `server.ts` script. 
+
+`const hostname = 'localhost';`
+`const port = 3000;`
+
+Obs: You can set above contants to any value makes sense to your environment.
+
+After that you can Just call the main application script `server.ts` under the `currency-calculator` directory. 
 
 &emsp;`$ ./server.ts` <br>
 
