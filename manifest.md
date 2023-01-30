@@ -77,7 +77,7 @@ Look for the following line in the first line of `server.ts` script.<br>
 
 `const port = 3000;`
 
-Just change the `port` constant to any integer between 1000 to 65535, which is not assigned to another TCP services. 
+Just change the `port` constant to any integer between 1024 to 65535, which is not normally assigned to another TCP service. However, pay attention since you may have an TCP service running on the port you choose. ;-)
 
 
 
