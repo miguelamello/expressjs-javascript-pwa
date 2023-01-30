@@ -85,7 +85,7 @@ Testing the microservice for checking its properly functioning is crucial.
 Follow those steps to test:
 
 1) Open a command terminal on `~/currency-calculator`. Aka the project directory.
-2) `cd __tests__` Aka the directory where tests scripts are.
+2) `cd __tests__`. Aka the directory where tests scripts are.
 3) Execute the command `./jest` to run all the available tests.
 
 Obs: You can run tests individually by executing the command `npx jest target-test-file.ts`. Where `target-test-file.ts` you can fing inside `__tests__` directory. 
