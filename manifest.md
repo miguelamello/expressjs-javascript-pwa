@@ -45,7 +45,7 @@ Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/loca
 
 ## Executing
 
-Running `node-calculator` is extremely simple. Just call the main application script `server.ts` under the `node-calculator` directory. 
+Running `currency-calculator` is extremely simple. Just call the main application script `server.ts` under the `currency-calculator` directory. 
 
 &emsp;`$ ./server.ts` <br>
 
