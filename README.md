@@ -1,6 +1,6 @@
 # PWA APP
 
-This application aims to use the concepts of Progressive Web Application, among which allow the application to remain available and interactive for the end user, even in the absence of an internet connection. It also allows information modified by the user during the absence of an internet connection to be automatically saved in the remote database, and thus persisted in the application. All of this must occur transparently and imperceptibly for the end user.
+This application aims to use the concepts of Progressive Web Application, among which allow the application to remain available and interactive for the end user, even in the absence of an internet connection. It also allows information modified by the user during the absence of an internet connection to be automatically saved to remote database, and thus persisted in the application. All of this must occur transparently and imperceptibly for the end user.
 
 ### LightHouse Score: 99%
 This PWA is scoring 99% of performance in LightHouse. 

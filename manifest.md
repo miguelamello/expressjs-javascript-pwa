@@ -11,7 +11,7 @@ The main objective of this microservice is to offer a fast and effective way of 
 
 The application is developed in Node.js with Typescript, which ensures robustness and resilience in the event of runtime errors. Node.js is known for its speed, security and versatility. Typescript is known as a language that values good programming practice, which reduces or even eliminates code execution errors.
 
-We can highlight the following characteristics:
+We can highlight the following characteristics about this application:
 
 * Robustness
 * Resilience
