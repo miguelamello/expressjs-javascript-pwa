@@ -50,7 +50,7 @@ Running `currency-calculator` is extremely simple, but first adjust the `hostnam
 `const hostname = 'localhost';` <br>
 `const port = 3000;`
 
-Obs: You can set above contants to any value makes sense to your environment.
+Obs: You can set above contants to any value that makes sense to your environment.
 
 After that you can Just call the main application script `server.ts` under the `currency-calculator` directory. 
 
