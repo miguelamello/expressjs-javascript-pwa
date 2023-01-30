@@ -47,7 +47,7 @@ Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/loca
 
 Running `currency-calculator` is extremely simple, but first adjust the `hostname`and `port` in the `server.ts` script. 
 
-`const hostname = 'localhost';`
+`const hostname = 'localhost';` <br>
 `const port = 3000;`
 
 Obs: You can set above contants to any value makes sense to your environment.
