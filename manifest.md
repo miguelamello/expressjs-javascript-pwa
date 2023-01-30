@@ -40,7 +40,7 @@ More about this ahead.
 
 &emsp;`$ sudo npm i ts-node -g` <br> 
 
-Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/local/bin/ts-node`. Under Windows you should look for how running Typescript applications under Node.js.
+Obs: Under Linux, MacOS, Unix you should see the ts-node binary under `/usr/local/bin/ts-node`. Under Windows you should look for how running Typescript applications under Node.js. I recommend you install `ts-node` in the global npm. 
 
 
 ## Executing
