@@ -31,8 +31,8 @@ The application is simple to install. Below is a suggestion of steps to follow:
 
 2) Install all packages and dependencies needed to run the application.
 
-&emsp;`$ cd node-calculator` <br>
-&emsp;`$ npm install` <br>
+&emsp;`$ cd currency-calculator` <br>
+&emsp;`$ npm i` <br>
 
 3) You should install globally the package `ts-node`. 
 This package is needed for running a Typescript script under Node.js without transpiling to Javascript before. `ts-node` makes the compilation at runtime and allows Node.js understand Typescript.
