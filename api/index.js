@@ -9,7 +9,7 @@
 
   {
     "module": "moduleName",
-    "method": "methodName",
+    "procedure": "procedureName",
     "params": {}
   }
 
@@ -27,9 +27,13 @@
 */
 
 const http = require('http');
+const hostname = 'localhost';
+const port = 8080;
 
 try {
   http.createServer((request, response) => {
+    //Enable CORS on the server.
+    response.setHeader('Access-Control-Allow-Origin', '*');
     //Content-Type should always be JSON.
     response.setHeader('Content-Type', 'application/json');
     //Accepts only POST method on the root domain.
@@ -43,8 +47,7 @@ try {
       }).on('end', () => {
         jsonString = Buffer.concat(jsonString).toString();
         const Dispatcher = require('./modules/dispatcher');
-        let IDispatcher = new Dispatcher();
-        IDispatcher.getDispacher(jsonString)
+        Dispatcher.getDispacher(jsonString)
         .then( (result) => response.end( result ) )
         .catch( (err) => { 
             let feedback = { 
@@ -63,7 +66,9 @@ try {
       //Returns a error message to the client.
       response.end(JSON.stringify(feedback)); 
     }
-  }).listen(3000);
+  }).listen(port, hostname, () => {
+    console.log(`Server running at http://${hostname}:${port}/`);
+  });
 } catch (err) {
   //Must implement Error Reporting and Logging.
   console.error(err); 

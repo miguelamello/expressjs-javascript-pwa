@@ -20,7 +20,7 @@
   .alertmessage-message-blue {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    width: auto; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
     font-size: 0.8rem;
     color: #000000;
     border-top: 1px solid #2980B9;
@@ -33,7 +33,7 @@
   .alertmessage-message-green {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    width: auto; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
     font-size: 0.8rem;
     color: #000000;
     border-top: 1px solid #27AE60;
@@ -46,7 +46,7 @@
   .alertmessage-message-red {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    width: auto; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
     font-size: 0.8rem;
     color: #000000;
     border-top: 1px solid #E74C3C;
@@ -59,7 +59,7 @@
   .alertmessage-message-yellow {
     margin: 15% auto; /* 15% from the top and centered */
     padding: 20px;
-    width: auto; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
     font-size: 0.8rem;
     color: #000000;
     border-top: 1px solid #F1C40F;
@@ -68,6 +68,5 @@
     border-left: 10px solid #F1C40F;
     background-color: #fefefe;
   }
-
 
 }

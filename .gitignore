@@ -1,6 +1,6 @@
 #node_modules is not needed.
 #Modules can be reinstalled from package.json.
-node_modules/
+#node_modules/
 
 #appconfig.js should be configured with values 
 #suited to the project. Anything under configObj 

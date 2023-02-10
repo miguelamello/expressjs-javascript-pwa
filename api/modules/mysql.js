@@ -4,19 +4,20 @@
   mysql connections on the api.
 */
 
+const mysql = require('mysql2');
+const configObj = require('./apiconfig');
+
 class MySql {
-    
-  #mysql;
+
   #host;
   #user;
   #password;
   #system_db; 
   #user_db;
   #pool;
+  #poolPromise;
 
   constructor() {
-    const configObj = require('./apiconfig');
-    this.#mysql = require('mysql2/promise');
     this.#host = configObj.host;
     this.#user = configObj.user;
     this.#password = configObj.password;
@@ -26,7 +27,7 @@ class MySql {
   }
 
   #createPool() {
-    this.#pool = this.#mysql.createPool({
+    this.#pool = mysql.createPool({
       host: this.#host,
       user: this.#user,
       password: this.#password, 
@@ -35,19 +36,25 @@ class MySql {
       connectionLimit: 10,
       queueLimit: 0
     });
+    this.#poolPromise = this.#pool.promise();
+  }
+
+  #releaseConnection() { 
+    this.#pool.getConnection(function(err, conn) { conn.release(); });
   }
 
   query( sql = '' ) {
-    if ( this.#pool ) {
+    if ( this.#poolPromise ) {
       return 'ok';
     }
   }
 
-  async select( sql, params ) {
-    await this.#pool.execute( sql, params )
-    .then( (rows) => rows );
+  async execute( sql, params ) {
+    const [rows, fields] = await this.#poolPromise.execute( sql, params );
+    this.#releaseConnection();
+    return rows; 
   }
 
 }
 
-module.exports = MySql;
+module.exports = new MySql();

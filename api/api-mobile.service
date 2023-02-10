@@ -1,0 +1,26 @@
+#
+# Systemd service configuration file for the node service. 
+# 
+# Usage: 
+# systemdctl status nodeapi
+# systemdctl start nodeapi
+# systemdctl stop nodeapi
+# systemdctl restart nodeapi
+#
+
+[Unit]
+Description=api.mobile.advosys
+
+[Service]
+User=miguel
+Group=miguel
+WorkingDirectory=/home/miguel/www/novo.advosys/mobile/source/api
+#Environment=NODE_ENV=production
+ExecStart=/usr/local/bin/node /home/miguel/www/novo.advosys/mobile/source/api/index.js
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
+
+

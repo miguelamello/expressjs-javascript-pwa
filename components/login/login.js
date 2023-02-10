@@ -20,11 +20,15 @@ class Login {
   #login( formData ) {
     AlertMessage.show('Fazendo login... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
-    const jsonData = JSON.stringify(formDataObject);
-    const fetchOptions = { method: "POST", body: jsonData };
+    const jsonData = { 
+      module: 'login', 
+      procedure: 'doLogin', 
+      params: formDataObject
+    };
+    const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
     fetch(configObj.apiurl, fetchOptions)
     .then((response) => { return response.json() })
-    .then((data) => {   console.log(data); 
+    .then((data) => { 
       if ( data.status ) {
         AlertMessage.hide();
         const App = this.#getObserver('app');

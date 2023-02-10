@@ -25,7 +25,7 @@
     border-right: 1px solid #2980B9;
     border-bottom: 1px solid #2980B9;
     border-left: 10px solid #2980B9;
-    width: auto; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
   }
 
   .confirmbox-container-green {
@@ -36,7 +36,7 @@
     border-right: 1px solid #27AE60;
     border-bottom: 1px solid #27AE60;
     border-left: 10px solid #27AE60;
-    width: auto; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
   }
 
   .confirmbox-container-yellow {
@@ -47,7 +47,7 @@
     border-right: 1px solid #F1C40F;
     border-bottom: 1px solid #F1C40F;
     border-left: 10px solid #F1C40F;
-    width: auto; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
   }
 
   .confirmbox-container-red {
@@ -58,7 +58,7 @@
     border-right: 1px solid #E74C3C;
     border-bottom: 1px solid #E74C3C;
     border-left: 10px solid #E74C3C;
-    width: auto; /* Could be more or less, depending on screen size */
+    width: 60%; /* Could be more or less, depending on screen size */
   }
 
   .confirmbox-message {

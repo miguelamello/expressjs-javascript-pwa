@@ -6,6 +6,7 @@
   defines, and lastly returns the result.
 */
 
+const Common = require('./common');
 class Dispatcher {
 
   #lastError;
@@ -44,12 +45,12 @@ class Dispatcher {
 
     {
       "module": "moduleName",
-      "method": "methodName",
+      "procedure": "procedureName",
       "params": {}
     }
   */
   #validateIndexes( jsonObj ) {
-    const requiredProperties = ['module', 'method', 'params'];
+    const requiredProperties = ['module', 'procedure', 'params'];
     let hasAllProperties = true;
     for (let i = 0; i < requiredProperties.length; i++) {
       if (!jsonObj.hasOwnProperty(requiredProperties[i])) {
@@ -72,7 +73,7 @@ class Dispatcher {
 
     {
       "module": "moduleName", //Must be a string.
-      "method": "methodName", //Must be a string.
+      "procedure": "methodName", //Must be a string.
       "params": {} //Must be a object
     }
   */
@@ -80,7 +81,7 @@ class Dispatcher {
     let isValid = true;
     const requiredProperties = {
       'module': 'string',
-      'method': 'string',
+      'procedure': 'string',
       'params': 'object'
     };
     for (const prop in requiredProperties) {
@@ -106,13 +107,13 @@ class Dispatcher {
   }
 
   async #runCommand( jsonObj ) {
-    let data;
+    const module = jsonObj.module.toLowerCase(); 
+    const procedure = Common.toCamelCase(jsonObj.procedure);
     try {
-      const Callee = require(`./${jsonObj.module.toLowerCase()}`);
-      let ICallee = new Callee();
+      const Callee = require(`./${module}`);
       try {
-        data = await ICallee[jsonObj.method].call(ICallee, jsonObj.params);
-      } catch (err) {
+        return await Callee[procedure].call(Callee, jsonObj.params);
+      } catch (err) { console.log(err);
         if (err.code) {
           //Must implement Error Reporting and Logging.
           console.error(err); 
@@ -123,10 +124,10 @@ class Dispatcher {
         } else {
           this.#lastError = { 
             error: true, 
-            message: `Method '${jsonObj.method}' does not exist. Follow the systax from documentation.` 
+            message: `Procedure '${procedure}' does not exist. Follow the systax from documentation.` 
           };
         }
-        return data;
+        return false;
       }
     } catch (err) {
       if (err.code) {
@@ -139,12 +140,11 @@ class Dispatcher {
       } else {
         this.#lastError = { 
           error: true, 
-          message: `Module '${jsonObj.module}' does not exist. Follow the syntax from documentation.` 
+          message: `Module '${module}' does not exist. Follow the syntax from documentation.` 
         };
       }
-      return data;
+      return false;
     }
-    return data;
   }
 
   /*
@@ -169,4 +169,4 @@ class Dispatcher {
 
 }
 
-module.exports = Dispatcher;
+module.exports = new Dispatcher();
