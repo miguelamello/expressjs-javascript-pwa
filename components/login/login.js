@@ -3,6 +3,7 @@
 import './login.css';
 import configObj from '../../appconfig';
 import AlertMessage from '../alertmessage/alertmessage'; 
+import Session from '../../controllers/session';
 
 class Login {
 
@@ -15,26 +16,13 @@ class Login {
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
-    this.#activateSession();
   }
-
-  #getSession( session_id ) {
-    console.log( session_id );
-  }
-
-  #activateSession() {
-    const jsonData = { module: 'login', procedure: 'activateSession', params: {} };
-    const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
-    fetch(configObj.apiurl, fetchOptions)
-    .then((response) => { return response.json() })
-    .then((result) => { 
-      if ( result.status ) {
-        this.#getSession( result.data[0].session_id || 0 )
-      }
-    });
-  } 
 
   #login( formData ) {
+    const session = Session.getSession();
+    console.log(session);
+    return false;
+
     AlertMessage.show('Fazendo login... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
     const jsonData = { module: 'login', procedure: 'doLogin', params: formDataObject };

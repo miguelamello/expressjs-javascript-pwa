@@ -4,23 +4,12 @@
   related to login.
 */
 
-const crypto = require('crypto');
 const Common = require('./common');
 const MySql = require('./mysql');
+const Session = require('./session');
 class Login {
   
   constructor() {}
-
-  async activateSession( params ) {
-    const load = { status: false, message: "", data: [] };
-    const hash = crypto.randomBytes(16).toString('hex');
-    const insertId = await MySql.getInserted('INSERT INTO sessions (data_sessions, hash_sessions) VALUES (?, ?)', [ '{}', hash ]);
-    if ( insertId ) {
-      load.status = true;
-      load.data.push({ session_id: insertId });
-    }
-    return load;
-  }
 
   async doLogin( params ) {
     const load = { status: false, message: "Não foi possível o login com as credenciais enviadas. Verifique e tente novamente", data: [] };

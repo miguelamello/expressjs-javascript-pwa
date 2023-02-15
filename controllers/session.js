@@ -1,138 +1,86 @@
-/*
-  Class Session
-  Classe base que gerencia o storage SESSION. 
-*/
+"use strict";
 
-function Session() {
+import configObj from '../appconfig';
+import AlertMessage from '../components/alertmessage/alertmessage';
+class Session {
 
-  //--> PRIVATE PROPERTIES
+  #session = {};
 
-  const Crypt = import('./crypt');
-  const Common = import('./common');
-  let _is_logged = 0; 
-  let _session = {};
-  let _permissions = {};
-  let _modules = {};
-  let _limits = {};
+  constructor() {
+    this.#hasLocalStorage();
+  }
 
-  //--> PRIVATE METHODS
-
-  let _setSession = (session) => {
-    _session = session;
-    _setLimits( _session.plano );
-  };
-
-  let _setLimits = ( plano ) => {
-    for ( let i in plano ) {
-      _limits[i.slice(0, -7)] = plano[i];
+  #hasLocalStorage() {
+    if (typeof localStorage !== 'undefined') {
+      this.#hasStoredSession();
+    } else {
+      this.#showAlert();
     }
-  };
+  }
 
-  let _setPermissions = () => {
-    _permissions = _session.permissions;
-  };
-
-  let _setAppMenuItens = () => {
-    if ($$("appmenu-list")) {
-      $$("appmenu-list").parse(_session.appmenu);
+  #hasStoredSession() {
+    const session_id = localStorage.getItem('id_sessions');
+    if (session_id) {
+      this.#loadSession({
+        id_sessions: localStorage.getItem('id_sessions'),
+        created_sessions: localStorage.getItem('created_sessions'),
+        updated_sessions: localStorage.getItem('updated_sessions'),
+        expires_sessions: localStorage.getItem('expires_sessions'),
+        algorithm_sessions: localStorage.getItem('algorithm_sessions'),
+        iv_sessions: localStorage.getItem('iv_sessions'),
+        key_sessions: localStorage.getItem('key_sessions')
+      });
+    } else {
+      this.#activateSession();
     }
-  };
+  }
 
-  let _setModulesList = () => { 
-    _modules = _session.gestores;
-  };
+  #showAlert() {
+    AlertMessage.show(`
+      Esse navegador não possui os recursos necessários 
+      para utilizar esse aplicativo. Atualize seu navegador 
+      web para a versão mais atual e retorne. Obrigado.
+    `, 'red');
+    setTimeout(() => AlertMessage.hide(), 10000);
+  }
 
-  let _encodeSession = ( session ) => {
-    for ( let i in session.login ) {
-      session.login[i] = Crypt._encryptString( session.login[i] );
-    }
-    for ( let i in session.plano ) {
-      session.plano[i] = Crypt._encryptString( session.plano[i] );
-    }
-    return session;
-  };
+  #loadSession( session ) {
+    this.#session.id_sessions = session.id_sessions;
+    this.#session.created_sessions = session.created_sessions;
+    this.#session.updated_sessions = session.updated_sessions;
+    this.#session.expires_sessions = session.expires_sessions;
+    this.#session.algorithm_sessions = session.algorithm_sessions;
+    this.#session.iv_sessions = session.iv_sessions;
+    this.#session.key_sessions = session.key_sessions;
+  }
 
-  let _decodeSession = ( session ) => {
-    for ( let i in session.login ) {
-      session.login[i] = Crypt._decrypt( session.login[i] );
-    }
-    for ( let i in session.plano ) {
-      session.plano[i] = Crypt._decrypt( session.plano[i] );
-    }
-    return session;
-  };
+  #saveSession( session ) {
+    localStorage.setItem('id_sessions', session.id_sessions);
+    localStorage.setItem('created_sessions', session.created_sessions);
+    localStorage.setItem('updated_sessions', session.updated_sessions);
+    localStorage.setItem('expires_sessions', session.expires_sessions);
+    localStorage.setItem('algorithm_sessions', session.algorithm_sessions);
+    localStorage.setItem('iv_sessions', session.iv_sessions);
+    localStorage.setItem('key_sessions', session.key_sessions);
+    this.#loadSession( session );
+  }
 
-  //--> PUBLIC METHODS
+  #activateSession() {
+    const jsonData = { module: 'session', procedure: 'activateSession', params: {} };
+    const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
+    fetch(configObj.apiurl, fetchOptions)
+    .then((response) => { return response.json() })
+    .then((result) => { 
+      if ( result.status ) {
+        this.#saveSession(result.data); 
+      }
+    });
+  }
 
-  this._getSession = () => {
-    return _session;
-  };
-
-  this._destroySession = () => {
-    //Webix.storage.session.clear();
-  };
-
-  this._setStoredSession = ( session ) => {
-    Crypt._hexCryptoKey( session.login.cryptokey );
-    Crypt._hexCryptoIv( session.login.cryptoiv );
-    let _session = _encodeSession( Common._copyObj( session ) );
-    //Webix.storage.session.put( 'session', _session );
-    _setSession( session );
-  };
-
-  this._getStoredSession = () => {
-    let _session = 0; //Webix.storage.session.get('session');
-    if ( _session ) {
-      Crypt._hexCryptoKey( window._cryptokey );
-      Crypt._hexCryptoIv( window._cryptoiv );
-      let session = _decodeSession( _session );
-      _setSession( session );
-      Crypt._hexCryptoKey( session.login.cryptokey );
-      Crypt._hexCryptoIv( session.login.cryptoiv );
-    }
-    return _session;
-  };
-
-  this._reloadUserUI = () => {
-    _setAppMenuItens();
-    _setPermissions();
-    _setModulesList();
-  };
-
-  this._getPermissions = () => {
-    return _permissions;
-  };
-
-  this._getModuleID = (  name = "" ) => {
-    return _modules[name] || "";
-  };
-
-  this._getLogged = () => {
-    return _is_logged;
-  };
-
-  this._setLogged = (log) => {
-    _is_logged = log;
-  };
-
-  this._getLoggedUser = () => { 
-    let session = this._getSession();
-    if (session.login) {
-      let cname = session.login.name.split(" ");
-      let dname = cname[0] + " " + cname[cname.length - 1];
-      return dname + " | " + this._getTimeStamp();
-    }
-  };
-
-  // Verifica se o usuario é admin.
-  this._isAdmin = () => {
-    return ( _session.login.id_user == 1 ) || false; 
-  };
-
-  //--> MODULE INITIALIZATION
-  
-  (() => {})()
+  getSession() {
+    return this.#session;
+  }
 
 }
 
-export default new Session;
+export default new Session();
