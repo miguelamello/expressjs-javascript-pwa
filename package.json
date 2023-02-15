@@ -8,6 +8,7 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^9.1.0",
     "cleave.js": "^1.6.0",
+    "cookie-session": "^2.0.0",
     "crypto-js": "^4.1.1",
     "jquery": "^3.6.1",
     "jsonrpc-lite": "^2.2.0",

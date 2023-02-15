@@ -36,7 +36,7 @@ class Suporte extends React.Component {
     }
   }
 
-  sendMessage() { console.log('send');
+  sendMessage() { //console.log('send');
     /*this.setState(function(state, props) {
       state.nome = state.nome.trim();
       state.email = state.email.trim();

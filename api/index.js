@@ -1,5 +1,3 @@
-#!/usr/local/bin/node
-
 /*
   This is a Single Endpoint API accepting 
   only POST method with a JSON object 
@@ -51,7 +49,7 @@ try {
         .then( (result) => response.end( result ) )
         .catch( (err) => { 
             let feedback = { 
-              error: true, 
+              status: false, 
               message: 'Internal API error. Try Again later. Please report to API Admin.' 
             };
             //Returns a error message to the client.
@@ -62,7 +60,7 @@ try {
         );
       });
     } else {
-      let feedback = { error: true, message: "Invalid http method or url." };
+      let feedback = { status: false, message: "Invalid http method or url." };
       //Returns a error message to the client.
       response.end(JSON.stringify(feedback)); 
     }

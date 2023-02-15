@@ -15,28 +15,41 @@ class Login {
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
+    this.#activateSession();
   }
+
+  #getSession( session_id ) {
+    console.log( session_id );
+  }
+
+  #activateSession() {
+    const jsonData = { module: 'login', procedure: 'activateSession', params: {} };
+    const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
+    fetch(configObj.apiurl, fetchOptions)
+    .then((response) => { return response.json() })
+    .then((result) => { 
+      if ( result.status ) {
+        this.#getSession( result.data[0].session_id || 0 )
+      }
+    });
+  } 
 
   #login( formData ) {
     AlertMessage.show('Fazendo login... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
-    const jsonData = { 
-      module: 'login', 
-      procedure: 'doLogin', 
-      params: formDataObject
-    };
+    const jsonData = { module: 'login', procedure: 'doLogin', params: formDataObject };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
     fetch(configObj.apiurl, fetchOptions)
     .then((response) => { return response.json() })
-    .then((data) => { 
-      if ( data.status ) {
+    .then((result) => { console.log(result);
+      if ( result.status ) {
         AlertMessage.hide();
         const App = this.#getObserver('app');
         const Toolbar = App.getObserver('toolbar');
         Toolbar.showMenu();
         App.render('app-body','dashboard');
       } else {
-        AlertMessage.show(data.message, 'red');
+        AlertMessage.show(result.message, 'red');
         setTimeout(() => { AlertMessage.hide(); }, 3000);
       }
     });
@@ -54,7 +67,7 @@ class Login {
           <div class="login-form-title">Faça seu login para acessar o sistema.</div>
           <form id="4976ha6hty" class="login-form">
             <div class="login-input-form-container">
-              <input type="email" placeholder="Email:" autofocus id="l3wfqfd99w" 
+              <input type="email" placeholder="Email:" id="l3wfqfd99w" 
               pattern="^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}$" 
               title="Um email válido é requerido. Exemplo: nome@gmail.com" 
               maxlength="100" required class="login-input-form" name="email" />
@@ -126,7 +139,7 @@ class Login {
 
   getTemplate() { return this.#template; }
 
-  load() { console.log(`login loaded`);
+  load() {
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();

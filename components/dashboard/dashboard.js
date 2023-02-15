@@ -9,7 +9,7 @@ class Dashboard {
 
   constructor() {
     this.#setTemplate();
-    console.log('dashboard loaded');
+    //console.log('dashboard loaded');
   }
 
   #setTemplate() {

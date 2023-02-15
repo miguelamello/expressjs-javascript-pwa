@@ -91,7 +91,7 @@ class Toolbar {
 
   getTemplate() {  return this.#template; }
 
-  load() { console.log(`toolbar loaded`);
+  load() { //console.log(`toolbar loaded`);
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();

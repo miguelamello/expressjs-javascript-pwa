@@ -33,7 +33,7 @@ class App {
     return this.#observers[index];
   }
 
-  render( target, route ) {  console.log(`${route} rendered`);
+  render( target, route ) { //console.log(`${route} rendered`);
     this.#routes[route]().then( moduleDefault => { //loads the route
       const module = moduleDefault.default; //gets the module
       const container = document.getElementById(target); //gets the container

@@ -43,16 +43,16 @@ class MySql {
     this.#pool.getConnection(function(err, conn) { conn.release(); });
   }
 
-  query( sql = '' ) {
-    if ( this.#poolPromise ) {
-      return 'ok';
-    }
-  }
-
-  async execute( sql, params ) {
+  async getSelected( sql, params ) {
     const [rows, fields] = await this.#poolPromise.execute( sql, params );
     this.#releaseConnection();
     return rows; 
+  }
+
+  async getInserted( sql, params ) {
+    const result = await this.#poolPromise.execute( sql, params );
+    this.#releaseConnection();
+    return result[0].insertId || 0; 
   }
 
 }

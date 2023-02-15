@@ -13,7 +13,7 @@ class Dispatcher {
 
   constructor() {
     this.#lastError = { 
-      error: true, 
+      status: false, 
       message: "Unknown error." 
     };
   }
@@ -31,7 +31,7 @@ class Dispatcher {
       return jsonObj;
     } catch (err) {
       this.#lastError = { 
-        error: true, 
+        status: false, 
         message: "Invalid json object." 
       };
       return false;
@@ -56,7 +56,7 @@ class Dispatcher {
       if (!jsonObj.hasOwnProperty(requiredProperties[i])) {
         hasAllProperties = false;
         this.#lastError = { 
-          error: true, 
+          status: false, 
           message: `Required named index \'${requiredProperties[i]}\' 
                     is missing on the sent json.`
         };
@@ -89,7 +89,7 @@ class Dispatcher {
         if (Object.prototype.toString.call(jsonObj[prop]) !== '[object Object]') {
           isValid = false;
           this.#lastError = { 
-            error: true, 
+            status: false, 
             message: `${prop} must be of type object Object.` 
           };
           break;
@@ -97,7 +97,7 @@ class Dispatcher {
       } else if (typeof jsonObj[prop] !== requiredProperties[prop]) {
         isValid = false;
         this.#lastError = { 
-          error: true, 
+          status: false, 
           message: `${prop} must be of type ${requiredProperties[prop]}.` 
         };
         break;
@@ -118,12 +118,12 @@ class Dispatcher {
           //Must implement Error Reporting and Logging.
           console.error(err); 
           this.#lastError = { 
-            error: true, 
+            status: false, 
             message: `Internal API error. Try Again later. Please report to API Admin.` 
           };
         } else {
           this.#lastError = { 
-            error: true, 
+            status: false, 
             message: `Procedure '${procedure}' does not exist. Follow the systax from documentation.` 
           };
         }
@@ -134,12 +134,12 @@ class Dispatcher {
         //Must implement Error Reporting and Logging.
         console.error(err); 
         this.#lastError = { 
-          error: true, 
+          status: false, 
           message: `Internal API error. Try Again later. Please report to API Admin.` 
         };
       } else {
         this.#lastError = { 
-          error: true, 
+          status: false, 
           message: `Module '${module}' does not exist. Follow the syntax from documentation.` 
         };
       }

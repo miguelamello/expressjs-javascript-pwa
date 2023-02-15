@@ -66,7 +66,7 @@ class Support {
     AlertMessage.show('Abrindo chamado... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
     const jsonData = JSON.stringify(formDataObject);
-    const fetchOptions = { method: "POST", body: jsonData }; console.log(fetchOptions);
+    const fetchOptions = { method: "POST", body: jsonData }; //console.log(fetchOptions);
     /*fetch(configObj.apiurl, fetchOptions)
     .then((response) => { return response.json() })
     .then((data) => {   console.log(data); 
@@ -107,7 +107,7 @@ class Support {
 
   getTemplate() { return this.#template; }
 
-  load() { console.log(`support loaded`);
+  load() { //console.log(`support loaded`);
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();
