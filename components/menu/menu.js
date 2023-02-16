@@ -5,6 +5,7 @@ import { library, dom } from "@fortawesome/fontawesome-svg-core";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons/faPowerOff";
 import ConfirmBox from '../confirmbox/confirmbox'; 
+import Session from '../../controllers/session';
 
 class Menu {
 
@@ -104,6 +105,7 @@ class Menu {
       (Login) ? Login.load() : App.render('app-body','login');
       this.hide();
       Toolbar.hideMenu();
+      Session.deleteEntry('user');
     }); 
   }
 

@@ -6,53 +6,30 @@
 
 "use strict";
 
-function Crypt() {
+class Crypt {
 
-  // Private Properties
-  const CryptoJS = import('./../node_modules/crypto-js/crypto-js');
-  let _cryptokey = '';
-  let _cryptoiv = '';
+  constructor() {}
 
-  // Public Methods
-  this._encrypt = (data) => {
-    let encrypted = CryptoJS.AES.encrypt(
-      JSON.stringify(data), 
-      _cryptokey, 
-      { iv: _cryptoiv }
-    );
-    return encrypted.toString();
-  };
+  async encrypt(decrypted, key, iv) {
+    const data = new TextEncoder().encode(decrypted);
+    const keyBytes = new Uint8Array(key.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    const ivBytes = new Uint8Array(iv.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    const importedKey = await crypto.subtle.importKey('raw', keyBytes, { name: 'AES-CBC' }, false, ['encrypt']);
+    const encryptedData = await crypto.subtle.encrypt({ name: 'AES-CBC', iv: ivBytes }, importedKey, data);
+    const encryptedText = Array.from(new Uint8Array(encryptedData)).map(b => b.toString(16).padStart(2, '0')).join('');
+    return encryptedText;
+  }
 
-  this._encryptString = (data) => {
-    let encrypted = CryptoJS.AES.encrypt(
-      data, 
-      _cryptokey, 
-      { iv: _cryptoiv }
-    );
-    return encrypted.toString();
-  };
-
-  this._decrypt = (data) => {
-    let decrypted = CryptoJS.AES.decrypt(
-      data, 
-      _cryptokey, 
-      { iv: _cryptoiv }
-    );
-    return decrypted.toString(CryptoJS.enc.Utf8);
-  };
-
-  this._hexCryptoKey = (key) => {
-    _cryptokey = CryptoJS.enc.Hex.parse(key);
-  };
-
-  this._hexCryptoIv = (iv) => {
-    _cryptoiv = CryptoJS.enc.Hex.parse(iv);
-  };
-
-  //--> MODULE INITIALIZATION
-  
-  (() => {})()
+  async decrypt(encrypted, key, iv) {
+    const encryptedBytes = new Uint8Array(encrypted.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    const keyBytes = new Uint8Array(key.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    const ivBytes = new Uint8Array(iv.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+    const importedKey = await crypto.subtle.importKey('raw', keyBytes, { name: 'AES-CBC' }, false, ['decrypt']);
+    const decryptedData = await crypto.subtle.decrypt({ name: 'AES-CBC', iv: ivBytes }, importedKey, encryptedBytes);
+    const decryptedText = new TextDecoder().decode(decryptedData);
+    return decryptedText;
+  }
 
 }
 
-export default new Crypt;
+export default new Crypt();

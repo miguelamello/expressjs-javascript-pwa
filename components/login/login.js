@@ -16,31 +16,39 @@ class Login {
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
+    this.#isLogged();
+  }
+
+  #isLogged() {
+    const user = Session.getEntry('user');
+    if ( user ) {
+      //const App = this.#getObserver('app');
+      //const Toolbar = App.getObserver('toolbar');
+      //Toolbar.showMenu();
+      //App.render('app-body','dashboard');
+    }
   }
 
   #login( formData ) {
-    const session = Session.getSession();
-    console.log(session);
-    return false;
-
     AlertMessage.show('Fazendo login... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
     const jsonData = { module: 'login', procedure: 'doLogin', params: formDataObject };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
     fetch(configObj.apiurl, fetchOptions)
     .then((response) => { return response.json() })
-    .then((result) => { console.log(result);
+    .then((result) => {
       if ( result.status ) {
         AlertMessage.hide();
         const App = this.#getObserver('app');
         const Toolbar = App.getObserver('toolbar');
         Toolbar.showMenu();
         App.render('app-body','dashboard');
+        Session.saveEntry( 'user', result.data );
       } else {
         AlertMessage.show(result.message, 'red');
         setTimeout(() => { AlertMessage.hide(); }, 3000);
       }
-    });
+    });      
   }
 
   /** setMount is called every time DOM is rendered. */

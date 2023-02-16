@@ -2,6 +2,7 @@
 
 import configObj from '../appconfig';
 import AlertMessage from '../components/alertmessage/alertmessage';
+import Crypto from '../controllers/crypt';
 class Session {
 
   #session = {};
@@ -19,16 +20,16 @@ class Session {
   }
 
   #hasStoredSession() {
-    const session_id = localStorage.getItem('id_sessions');
-    if (session_id) {
+    const session = JSON.parse(localStorage.getItem('session'));
+    if ( session ) {
       this.#loadSession({
-        id_sessions: localStorage.getItem('id_sessions'),
-        created_sessions: localStorage.getItem('created_sessions'),
-        updated_sessions: localStorage.getItem('updated_sessions'),
-        expires_sessions: localStorage.getItem('expires_sessions'),
-        algorithm_sessions: localStorage.getItem('algorithm_sessions'),
-        iv_sessions: localStorage.getItem('iv_sessions'),
-        key_sessions: localStorage.getItem('key_sessions')
+        id_sessions: session.id_sessions,
+        created_sessions: session.created_sessions,
+        updated_sessions: session.updated_sessions,
+        expires_sessions: session.expires_sessions,
+        algorithm_sessions: session.algorithm_sessions,
+        iv_sessions: session.iv_sessions,
+        key_sessions: session.key_sessions
       });
     } else {
       this.#activateSession();
@@ -45,23 +46,11 @@ class Session {
   }
 
   #loadSession( session ) {
-    this.#session.id_sessions = session.id_sessions;
-    this.#session.created_sessions = session.created_sessions;
-    this.#session.updated_sessions = session.updated_sessions;
-    this.#session.expires_sessions = session.expires_sessions;
-    this.#session.algorithm_sessions = session.algorithm_sessions;
-    this.#session.iv_sessions = session.iv_sessions;
-    this.#session.key_sessions = session.key_sessions;
+    this.#session = session;
   }
 
   #saveSession( session ) {
-    localStorage.setItem('id_sessions', session.id_sessions);
-    localStorage.setItem('created_sessions', session.created_sessions);
-    localStorage.setItem('updated_sessions', session.updated_sessions);
-    localStorage.setItem('expires_sessions', session.expires_sessions);
-    localStorage.setItem('algorithm_sessions', session.algorithm_sessions);
-    localStorage.setItem('iv_sessions', session.iv_sessions);
-    localStorage.setItem('key_sessions', session.key_sessions);
+    localStorage.setItem('session', JSON.stringify(session));
     this.#loadSession( session );
   }
 
@@ -79,6 +68,20 @@ class Session {
 
   getSession() {
     return this.#session;
+  }
+
+  getEntry( entry ) {
+    return localStorage.getItem( entry );
+  }
+
+  deleteEntry( entry ) {
+    (localStorage.getItem( entry )) ? localStorage.removeItem( entry ) : undefined;
+  }
+
+  saveEntry( entry, data ) {
+    const session = this.getSession();
+    Crypto.encrypt(JSON.stringify(data), session.key_sessions, session.iv_sessions)
+    .then((encrypted) => localStorage.setItem(entry, encrypted) );
   }
 
 }

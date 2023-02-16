@@ -2,6 +2,19 @@
 
 import './assets/css/index.css';
 import App from './app.js';
+import Session from './controllers/session';
 
-App.render('app-header','toolbar');
-App.render('app-body','login');
+const user = Session.getEntry('user');
+
+if ( user ) {
+  App.render('app-header','toolbar');
+  App.render('app-body','dashboard');
+  setTimeout(() => {
+    const Toolbar = App.getObserver('toolbar');
+    Toolbar.showMenu();
+  }, 250);
+} else {
+  App.render('app-header','toolbar');
+  App.render('app-body','login');  
+}
+
