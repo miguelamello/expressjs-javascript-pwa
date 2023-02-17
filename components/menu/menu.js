@@ -14,13 +14,24 @@ class Menu {
   #menu;
   #menuButton;
   #logoutButton;
+  #userName;
+  #userEmail;
 
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
     this.#setListeners();
+    this.#showUserInfo();
     library.add([faXmark,faPowerOff]);
     dom.watch();
+  }
+
+  async #showUserInfo() {
+    await Session.getEntry('user')
+    .then((user) => {
+      this.#userName.innerHTML = user[0].name_login;
+      this.#userEmail.innerHTML = user[0].email_login;  
+    });
   }
 
   #setTemplate() {
@@ -29,8 +40,8 @@ class Menu {
         <div class="menu-container">
           <div id="d4pk5lph5j" class="menu-header">
             <div>
-              <div id="r7qqialyp0">Miguel Mello</div>
-              <div id="r213ghv5gc">miguel@gmail.com</div>
+              <div id="r7qqialyp0" class="menu-header-userinfo"></div>
+              <div id="r213ghv5gc" class="menu-header-userinfo"></div>
             </div>
             <div></div>
             <div><i class="fas fa-xmark show-cursor"></i></div>
@@ -60,9 +71,8 @@ class Menu {
               </div>
             </div>
           </div> 
-          <div id="0cjj9m7agt" class="poweroff">
-            <i class="fas fa-power-off"></i>
-            <span class="show-cursor">Sair</span>
+          <div class="poweroff">
+            <button id="0cjj9m7agt" class="logout-button">Sair</button>
           </div>
         </div>
       </div>
@@ -75,6 +85,8 @@ class Menu {
       this.#menu = document.getElementById('zpqocl0nca');
       this.#menuButton = document.getElementById('d4pk5lph5j');
       this.#logoutButton = document.getElementById('0cjj9m7agt');
+      this.#userName = document.getElementById('r7qqialyp0');
+      this.#userEmail = document.getElementById('r213ghv5gc');
     });
   }
 

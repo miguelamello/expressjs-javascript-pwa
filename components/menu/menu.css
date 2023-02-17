@@ -13,6 +13,7 @@
     right: 0;
     bottom: 0;
     background-color: #fefefe;
+    font-size: 1.0rem;
     z-index: 999; /* Specify a stack order in case you're using a different order for other elements */
   }
 
@@ -75,9 +76,35 @@
     padding: 30px;
   }
 
+  .logout-button {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .logout-button:hover {
+    background-color: #e53935;
+  }
+
+  .menu-header-userinfo {
+    overflow: hidden;
+  }
+
 }
 
 @media screen and (max-width: 320px) {
+
+  .menu {
+    font-size: 0.8rem;
+  }
 
   .menu-itens {
     display: flex;

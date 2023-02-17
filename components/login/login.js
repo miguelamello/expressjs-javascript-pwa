@@ -16,17 +16,6 @@ class Login {
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
-    this.#isLogged();
-  }
-
-  #isLogged() {
-    const user = Session.getEntry('user');
-    if ( user ) {
-      //const App = this.#getObserver('app');
-      //const Toolbar = App.getObserver('toolbar');
-      //Toolbar.showMenu();
-      //App.render('app-body','dashboard');
-    }
   }
 
   #login( formData ) {
@@ -140,6 +129,10 @@ class Login {
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();
     this.setListeners();
+  }
+
+  isLogged() {
+    return (Session.getEntry('user')) ? true : false;
   }
 
 }

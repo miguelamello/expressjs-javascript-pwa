@@ -70,8 +70,16 @@ class Session {
     return this.#session;
   }
 
-  getEntry( entry ) {
-    return localStorage.getItem( entry );
+  async getEntry( entry ) {
+    const session = this.getSession();
+    const key = session.key_sessions;
+    const iv = session.iv_sessions; 
+    const item = localStorage.getItem( entry );
+    if (item) {
+      return await Crypto.decrypt(item, key, iv).then((decrypted) => JSON.parse(decrypted));
+    } else {
+      return new Promise((resolve, reject) => resolve(null));
+    }
   }
 
   deleteEntry( entry ) {
