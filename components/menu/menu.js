@@ -21,17 +21,9 @@ class Menu {
     this.#setTemplate();
     this.#bondToDom();
     this.#setListeners();
-    this.#showUserInfo();
+    this.showUserInfo();
     library.add([faXmark,faPowerOff]);
     dom.watch();
-  }
-
-  async #showUserInfo() {
-    await Session.getEntry('user')
-    .then((user) => {
-      this.#userName.innerHTML = user[0].name_login;
-      this.#userEmail.innerHTML = user[0].email_login;  
-    });
   }
 
   #setTemplate() {
@@ -90,10 +82,6 @@ class Menu {
     });
   }
 
-  #getObserver(index) {
-    return this.#observers[index];
-  }
-
   #setListeners() {
     setTimeout(() => { //wait for dom nodes creation
       if (this.#menuButton) {
@@ -111,14 +99,28 @@ class Menu {
 
   #logout() {
     ConfirmBox.show('Confirma logout?', 'red').then(() => {
-      const Toolbar = this.#getObserver('toolbar');
-      const App = this.#getObserver('app');
+      const Toolbar = this.getObserver('toolbar');
+      const App = this.getObserver('app');
       const Login = App.getObserver('login');
       (Login) ? Login.load() : App.render('app-body','login');
       this.hide();
       Toolbar.hideMenu();
-      Session.deleteEntry('user');
+      Session.clear();
     }); 
+  }
+
+  async showUserInfo() {
+    await Session.getEntry('user')
+    .then((user) => {
+      if (user) {
+        this.#userName.innerHTML = user[0].name_login;
+        this.#userEmail.innerHTML = user[0].email_login; 
+      }
+    });
+  }
+
+  getObserver(index) {
+    return this.#observers[index];
   }
 
   setObservers( observers ) {

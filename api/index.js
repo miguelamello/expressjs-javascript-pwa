@@ -25,15 +25,20 @@
 */
 
 const http = require('http');
-const hostname = 'localhost';
-const port = 9090;
+const hostname = '127.0.0.1';
+const port = 9000;
 
 try {
   http.createServer((request, response) => {
-    //Enable CORS on the server.
+
+    //Configure CORS on the server.
     response.setHeader('Access-Control-Allow-Origin', '*');
+    response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
     //Content-Type should always be JSON.
     response.setHeader('Content-Type', 'application/json');
+
     //Accepts only POST method on the root domain.
     if (request.method === 'POST' && request.url === '/') { 
       let jsonString = [];

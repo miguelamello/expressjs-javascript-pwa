@@ -10,6 +10,7 @@
     "cleave.js": "^1.6.0",
     "cookie-session": "^2.0.0",
     "crypto-js": "^4.1.1",
+    "esm": "^3.2.25",
     "jquery": "^3.6.1",
     "jsonrpc-lite": "^2.2.0",
     "mysql2": "^3.0.1",
@@ -27,7 +28,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack", 
+    "start": "http-server -c-1 -p 3000"
   },
   "keywords": [],
   "author": "",

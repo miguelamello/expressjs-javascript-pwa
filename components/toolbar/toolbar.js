@@ -48,7 +48,7 @@ class Toolbar {
     Menu.setObserver('toolbar', this);
   }
 
-  #getObserver(index) {
+  getObserver(index) {
     return this.#observers[index];
   }
 
@@ -61,7 +61,7 @@ class Toolbar {
       }
       /*if (this.#homeButton) {
         this.#homeButton.addEventListener('click', () => {
-          const App = this.#getObserver('App');
+          const App = this.getObserver('App');
           App.render('app-body','dashboard');
         });
       }
@@ -87,6 +87,10 @@ class Toolbar {
     setTimeout(() => {
       this.#menuButton.style.visibility = 'hidden';      
     });
+  }
+
+  showUserInfo() {
+    Menu.showUserInfo();
   }
 
   getTemplate() {  return this.#template; }

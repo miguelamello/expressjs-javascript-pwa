@@ -58,10 +58,6 @@ class Support {
     `;
   }
 
-  #getObserver(index) {
-    return this.#observers[index];
-  }
-
   #sendSupport( formData ) {
     AlertMessage.show('Abrindo chamado... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
@@ -72,7 +68,7 @@ class Support {
     .then((data) => {   console.log(data); 
       if ( data.status ) {
         AlertMessage.hide();
-        const App = this.#getObserver('App');
+        const App = this.getObserver('App');
         App.render('app-body','login');
       } else {
         AlertMessage.show(data.message, 'red');
@@ -94,11 +90,15 @@ class Support {
         this.#sendSupport(formData);
       });
       this.#homeButton.addEventListener('click', (e) => {
-        const App = this.#getObserver('app');
+        const App = this.getObserver('app');
         const Login = App.getObserver('login');
         (Login) ? Login.load() : App.render('app-body','login');
       });  
     });
+  }
+
+  getObserver(index) {
+    return this.#observers[index];
   }
 
   setObserver( index, module ) {

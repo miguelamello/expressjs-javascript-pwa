@@ -7,7 +7,7 @@ import Session from './controllers/session';
 (async () => {
   
   const user = await Session.getEntry('user');
-
+ 
   if ( user ) {
     App.render('app-header','toolbar');
     App.render('app-body','dashboard');

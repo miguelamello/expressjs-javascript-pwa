@@ -22,7 +22,7 @@ class Dashboard {
     `;
   }
 
-  #getObserver(index) {
+  getObserver(index) {
     return this.#observers[index];
   }
 

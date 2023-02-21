@@ -55,6 +55,12 @@ class MySql {
     return result[0].insertId || 0; 
   }
 
+  async getDeleted( sql, params ) {
+    const result = await this.#poolPromise.execute( sql, params );
+    this.#releaseConnection();
+    return result[0].affectedRows || 0; 
+  }
+
 }
 
 module.exports = new MySql();

@@ -28,11 +28,12 @@ class Login {
     .then((result) => {
       if ( result.status ) {
         AlertMessage.hide();
-        const App = this.#getObserver('app');
+        const App = this.getObserver('app');
         const Toolbar = App.getObserver('toolbar');
         Toolbar.showMenu();
         App.render('app-body','dashboard');
-        Session.saveEntry( 'user', result.data );
+        Session.saveEntry( 'user', result.data )
+        .then((result) => { if (result) Toolbar.showUserInfo(); });
       } else {
         AlertMessage.show(result.message, 'red');
         setTimeout(() => { AlertMessage.hide(); }, 3000);
@@ -99,7 +100,7 @@ class Login {
     }); 
   }
 
-  #getObserver(index) {
+  getObserver(index) {
     return this.#observers[index];
   }
 
@@ -111,7 +112,7 @@ class Login {
         this.#login(formData);
       });
       this.#support.addEventListener('click', (e) => {
-        const App = this.#getObserver('app');
+        const App = this.getObserver('app');
         const Support = App.getObserver('support');
         (Support) ? Support.load() : App.render('app-body','support');
       });  

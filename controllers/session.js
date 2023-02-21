@@ -5,8 +5,6 @@ import AlertMessage from '../components/alertmessage/alertmessage';
 import Crypto from '../controllers/crypt';
 class Session {
 
-  #session = {};
-
   constructor() {
     this.#hasLocalStorage();
   }
@@ -19,20 +17,14 @@ class Session {
     }
   }
 
-  #hasStoredSession() {
-    const session = JSON.parse(localStorage.getItem('session'));
+  async #hasStoredSession() {
+    const session = this.getSession();
     if ( session ) {
-      this.#loadSession({
-        id_sessions: session.id_sessions,
-        created_sessions: session.created_sessions,
-        updated_sessions: session.updated_sessions,
-        expires_sessions: session.expires_sessions,
-        algorithm_sessions: session.algorithm_sessions,
-        iv_sessions: session.iv_sessions,
-        key_sessions: session.key_sessions
-      });
+       const valid = await this.#validateSession( session.id_sessions );
+       if (!valid) { this.clear(); location.reload(); }
     } else {
-      this.#activateSession();
+      const active = await this.#activateSession();
+      if (active) this.#hasStoredSession();
     }
   }
 
@@ -45,38 +37,48 @@ class Session {
     setTimeout(() => AlertMessage.hide(), 10000);
   }
 
-  #loadSession( session ) {
-    this.#session = session;
-  }
-
   #saveSession( session ) {
     localStorage.setItem('session', JSON.stringify(session));
-    this.#loadSession( session );
   }
 
-  #activateSession() {
+  async #deleteSession( session_id ) {
+    const jsonData = { module: 'session', procedure: 'deleteSession', params: { session_id: session_id } };
+    const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
+    await fetch(configObj.apiurl, fetchOptions);
+  }
+
+  async #activateSession() {
     const jsonData = { module: 'session', procedure: 'activateSession', params: {} };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
-    fetch(configObj.apiurl, fetchOptions)
-    .then((response) => { return response.json() })
-    .then((result) => { 
-      if ( result.status ) {
-        this.#saveSession(result.data); 
-      }
-    });
+    const response = await fetch(configObj.apiurl, fetchOptions);
+    const result = await response.json();
+    if (result.status) this.#saveSession(result.data); 
+    return result.status; 
+  }
+
+  async #validateSession( session_id ) {
+    const jsonData = { module: 'session', procedure: 'validateSession', params: { session_id: session_id } };
+    const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
+    const response = await fetch(configObj.apiurl, fetchOptions);
+    const result = await response.json();
+    return result.status;
   }
 
   getSession() {
-    return this.#session;
+    return JSON.parse(localStorage.getItem('session'));
   }
 
   async getEntry( entry ) {
     const session = this.getSession();
-    const key = session.key_sessions;
-    const iv = session.iv_sessions; 
-    const item = localStorage.getItem( entry );
-    if (item) {
-      return await Crypto.decrypt(item, key, iv).then((decrypted) => JSON.parse(decrypted));
+    if ( session ) {
+      const key = session.key_sessions;
+      const iv = session.iv_sessions; 
+      const item = localStorage.getItem( entry );
+      if (item) {
+        return await Crypto.decrypt(item, key, iv).then((decrypted) => JSON.parse(decrypted));
+      } else {
+        return new Promise((resolve, reject) => resolve(null));
+      }
     } else {
       return new Promise((resolve, reject) => resolve(null));
     }
@@ -86,10 +88,18 @@ class Session {
     (localStorage.getItem( entry )) ? localStorage.removeItem( entry ) : undefined;
   }
 
-  saveEntry( entry, data ) {
+  clear() {
     const session = this.getSession();
-    Crypto.encrypt(JSON.stringify(data), session.key_sessions, session.iv_sessions)
-    .then((encrypted) => localStorage.setItem(entry, encrypted) );
+    this.#deleteSession( session.id_sessions );
+    localStorage.clear();
+    location.reload();
+  }
+
+  async saveEntry( entry, data ) {
+    const session = this.getSession();
+    const encrypted = await Crypto.encrypt(JSON.stringify(data), session.key_sessions, session.iv_sessions);
+    localStorage.setItem(entry, encrypted);
+    return encrypted;
   }
 
 }
