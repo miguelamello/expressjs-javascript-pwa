@@ -61,20 +61,21 @@ class Support {
   #sendSupport( formData ) {
     AlertMessage.show('Abrindo chamado... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
-    const jsonData = JSON.stringify(formDataObject);
-    const fetchOptions = { method: "POST", body: jsonData }; //console.log(fetchOptions);
-    /*fetch(configObj.apiurl, fetchOptions)
+    const jsonData = { module: 'login', procedure: 'openTicket', params: formDataObject };
+    const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
+    fetch(configObj.apiurl, fetchOptions)
     .then((response) => { return response.json() })
-    .then((data) => {   console.log(data); 
-      if ( data.status ) {
+    .then((result) => {
+      if ( result.status ) {
         AlertMessage.hide();
-        const App = this.getObserver('App');
-        App.render('app-body','login');
+        const App = this.getObserver('app');
+        const Login = App.getObserver('login');
+        (Login) ? Login.load() : App.render('app-body','login');
       } else {
-        AlertMessage.show(data.message, 'red');
+        AlertMessage.show(result.message, 'red');
         setTimeout(() => { AlertMessage.hide(); }, 3000);
       }
-    });*/
+    });
   }
 
   /** setMount is called every time DOM is rendered. */

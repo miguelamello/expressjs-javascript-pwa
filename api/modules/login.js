@@ -4,9 +4,11 @@
   related to login.
 */
 
+const nodemailer = require('nodemailer');
 const Common = require('./common');
 const MySql = require('./mysql');
 const Session = require('./session');
+const configObj = require('./apiconfig');
 class Login {
   
   constructor() {}
@@ -25,6 +27,43 @@ class Login {
     return load;
   }
 
+  async openTicket( params ) {
+    const load = { status: false, message: "Não foi possível abrir o chamado. Tente novamente daqui a pouco.", data: [] };
+    // create reusable transporter object using the default SMTP transport
+    const transporter = nodemailer.createTransport({
+      host: configObj.smtp,
+      port: 587,
+      secure: false,
+      auth: {
+          user: configObj.mailuser,
+          pass: configObj.mailpass
+      }
+    });
+    // setup email data with unicode symbols
+    const ticket = Math.floor(Math.random() * 900000) + 100000;
+    const today = (new Date()).toLocaleDateString('pt-BR');
+    const mailOptions = {
+      from: configObj.mailuser,
+      to: 'webmaster@advosys.com.br',
+      subject: `#${ticket} - Chamado de Suporte.`,
+      text: `Chamado de Suporte #${ticket} aberto em ${today}`,
+      html: `
+        ${params.nome} - ${params.email}<br><br>
+        ${params.mensagem}
+      `
+    };
+    // send mail with defined transport object
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      if (info.messageId) {
+       load.status = true; 
+       load.message = 'Mensagem enviada!';
+      } 
+    } catch (error) {
+      load.message = 'Houve algum erro no envio da mensagem. Tente novamente mais tarde.';
+    }
+    return load;
+  }
 }
 
 module.exports = new Login();
