@@ -4,7 +4,7 @@ This application aims to use the concepts of Progressive Web Application, among 
 
 ### LightHouse Score: 99%
 This PWA is scoring 99% of performance in LightHouse. 
-PS: Progressive Web Application analisys is out of thsis score since I'm still implementing it.
+PS: Progressive Web Application analisys is out of this score since I'm still implementing it.
 
 ### Goals
 The main objective is building an PWA APP that does not use any external library or framework. Only standard Web Technologies already present in mobile/desktop browsers shall be used. Babel is used to transpile the code and make the App compatible to browsers up to 10 years behind today.
