@@ -1,6 +1,7 @@
 "use strict"
 
 import './menu.css'; 
+import template from './menu.html';
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { faPowerOff } from "@fortawesome/free-solid-svg-icons/faPowerOff";
@@ -27,48 +28,7 @@ class Menu {
   }
 
   #setTemplate() {
-    this.#template = `
-      <div id="zpqocl0nca" class="menu">
-        <div class="menu-container">
-          <div id="d4pk5lph5j" class="menu-header">
-            <div>
-              <div id="r7qqialyp0" class="menu-header-userinfo"></div>
-              <div id="r213ghv5gc" class="menu-header-userinfo"></div>
-            </div>
-            <div></div>
-            <div><i class="fas fa-xmark show-cursor"></i></div>
-          </div>
-          <div></div>
-          <div class="menu-body">
-            <div class="menu-itens">
-              <div>
-                <div class="menu-iten">ANDAMENTOS</div>
-                <div class="menu-iten">CAIXA</div>
-                <div class="menu-iten">CAUSAS</div>
-                <div class="menu-iten">CLIENTES</div>
-                <div class="menu-iten">COMARCAS</div>
-                <div class="menu-iten">DOCUMENTOS</div>
-                <div class="menu-iten">INTIMAÇÕES</div>
-                <div class="menu-iten">MODELOS</div>
-              </div>
-              <div>
-                <div class="menu-iten">MONITORAMENTOS</div>
-                <div class="menu-iten">NATUREZAS</div>
-                <div class="menu-iten">PRAZOS</div>
-                <div class="menu-iten">PROCESSOS</div>
-                <div class="menu-iten">PUBLICAÇÕES</div>
-                <div class="menu-iten">REGISTROS</div>
-                <div class="menu-iten">USUARIOS</div>
-                <div class="menu-iten">VARAS</div>
-              </div>
-            </div>
-          </div> 
-          <div class="poweroff">
-            <button id="0cjj9m7agt" class="logout-button">Sair</button>
-          </div>
-        </div>
-      </div>
-    `;
+    this.#template = template;
   }
   
   #bondToDom() {
@@ -141,7 +101,7 @@ class Menu {
 
   getTemplate() {  return this.#template; }
 
-  load() { //console.log(`menu loaded`);
+  load() {
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();

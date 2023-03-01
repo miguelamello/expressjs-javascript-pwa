@@ -11,7 +11,7 @@ module.exports = {
 	entry: path.resolve(__dirname, "../source/index.js"),
 
 	output: {
-		filename: "index.js?v=" + date.getTime(), 
+		filename: "index.js", 
 		chunkFilename: '[contenthash].js', 
 		path: path.resolve(__dirname, "../dist")
 	},
@@ -49,6 +49,10 @@ module.exports = {
             },
           },
         ],
+      },
+			{
+        test: /\.html$/,
+        use: 'html-loader',
       }
 		]
 	},	
@@ -70,8 +74,8 @@ module.exports = {
       version: '<%= process.env.VERSION %>', 
     }), 
 		new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/*', '!favicons/**', '!images/**'],  // delete all files and directories, except for the 'static' directory
-    })
+      cleanOnceBeforeBuildPatterns: ['**/*'],  // delete all files and directories, except for the 'static' directory
+    }),
 		/*new WorkboxPlugin.GenerateSW({
 			// these options encourage the ServiceWorkers to get in there fast
 			// and not allow any straggling "old" SWs to hang around

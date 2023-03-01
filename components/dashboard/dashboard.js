@@ -1,6 +1,7 @@
 "use strict";
 
 import './dashboard.css';
+import template from './dashboard.html';
 
 class Dashboard {
 
@@ -13,13 +14,7 @@ class Dashboard {
   }
 
   #setTemplate() {
-    this.#template = `
-      <div id="dashboard" class="dashboard">
-        <div class="dashboard-container">
-          
-        </div>
-      </div>
-    `;
+    this.#template = template;
   }
 
   getObserver(index) {

@@ -1,6 +1,7 @@
 "use strict";
 
 import './login.css';
+import template from './login.html';
 import configObj from '../../appconfig';
 import AlertMessage from '../alertmessage/alertmessage'; 
 import Session from '../../controllers/session';
@@ -47,48 +48,7 @@ class Login {
   }
 
   #setTemplate() {
-    this.#template = `
-      <div id="login" class="login">
-        <div class="login-container">
-          <div class="login-form-title">Faça seu login para acessar o sistema.</div>
-          <form id="4976ha6hty" class="login-form">
-            <div class="login-input-form-container">
-              <input type="email" placeholder="Email:" id="l3wfqfd99w" 
-              pattern="^[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}$" 
-              title="Um email válido é requerido. Exemplo: nome@gmail.com" 
-              maxlength="100" required class="login-input-form" name="email" />
-            </div>
-            <div class="login-input-form-container">
-              <input type="password" placeholder="Senha:" pattern="^[0-9]{8}$"   
-              title="Uma senha válida é requerida. São 8 dígitos numéricos." 
-              maxlength="8" minlength="8" required class="login-input-form"
-              name="password" />
-            </div>
-            <div class="login-button-container">
-              <button id="dhg8a8przl" type="submit" class="action-button" />Login</button>
-            </div>
-          </form>
-          <div id="1aff5t0iww" class="login-footer">
-            <div><span id="ry3rrk1k4a" title="Clique para recuperar sua senha.">Recuperar Senha</span></div>
-            <div>|</div>
-            <div><span id="l8n11xuem1" title="Clique para criar uma nova conta.">Criar Conta</span></div>
-            <div>|</div>
-            <div><span id="b37ge60l4l" title="Clique para enviar uma mensagem ao suporte.">Obter Suporte</span></div>
-          </div>
-          <div id="cj3tjk2ed1" class="login-social"> 
-            <div class="login-social-google">
-              <img src="./images/google-sign-in.png" />
-            </div>
-            <div class="login-social-apple">
-              <img src="./images/apple-sign-in.png" />
-            </div>
-            <div class="login-social-microsoft">
-              <img src="./images/microsoft-sign-in.png" />
-            </div>
-          </div>
-        </div>
-      </div>
-    `;
+    this.#template = template;
   }
 
   #bondToDom() {

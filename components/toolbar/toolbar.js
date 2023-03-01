@@ -1,6 +1,7 @@
 "use strict";
 
 import './toolbar.css';
+import template from './toolbar.html';
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import Menu from '../menu/menu'; 
@@ -21,20 +22,7 @@ class Toolbar {
   }
 
   #setTemplate() {
-    this.#template = `
-      <div id="toolbar" class="toolbar">
-        <div class="toolbar-container">
-          <div class="slogan">
-            <span class="logo">PWAAPP</span>
-            &nbsp;|&nbsp;FULLY RESPONSIVE PWA
-          </div>
-          <div></div>
-          <div id="2xxxhxkd70">
-            <i class="fas fa-bars show-cursor" title="Clique para expandir o menu"></i>
-          </div>
-        </div>
-      </div>
-    `;
+    this.#template = template;
   }
 
   #bondToDom() {
@@ -95,7 +83,7 @@ class Toolbar {
 
   getTemplate() {  return this.#template; }
 
-  load() { //console.log(`toolbar loaded`);
+  load() {
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();
@@ -104,4 +92,5 @@ class Toolbar {
 
 }
 
+// Create an instance of the class.
 export default new Toolbar();
