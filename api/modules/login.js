@@ -48,9 +48,45 @@ class Login {
       subject: `#${ticket} - Chamado de Suporte.`,
       text: `Chamado de Suporte #${ticket} aberto em ${today}`,
       html: `
-        ${params.nome} - ${params.email}<br><br>
+        ${params.nome} - ${params.email}<br>
         ${params.mensagem}
       `
+    };
+    // send mail with defined transport object
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      if (info.messageId) {
+       load.status = true; 
+       load.message = 'Mensagem enviada!';
+      } 
+    } catch (error) {
+      load.message = 'Houve algum erro no envio da mensagem. Tente novamente mais tarde.';
+    }
+    return load;
+  }
+
+  async sendOldPass( params ) {
+    const load = { status: false, message: "Não foi possível reenviar a senha. Tente novamente daqui a pouco.", data: [] };
+    if ( !params.email ) { load.status = false; load.message = "Email is required."; }
+    if ( !Common.isEmail( params.email ) ) { load.status = false; load.message = "Email is invalid. Ex: username@gmail.com"; }
+    // create reusable transporter object using the default SMTP transport
+    const transporter = nodemailer.createTransport({
+      host: configObj.smtp,
+      port: 587,
+      secure: false,
+      auth: {
+          user: configObj.mailuser,
+          pass: configObj.mailpass
+      }
+    });
+    // setup email data 
+    const ticket = Math.floor(Math.random() * 900000) + 100000;
+    const mailOptions = {
+      from: configObj.mailuser,
+      to: params.email,
+      subject: `#${ticket} - Reenvio de senha de acesso.`,
+      text: `Sua senha atual é: wetwet23d322`,
+      html: `Sua senha atual é: wetwet23d322`
     };
     // send mail with defined transport object
     try {

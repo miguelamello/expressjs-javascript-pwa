@@ -1,0 +1,12 @@
+{
+  "name": "ADVOSYS | Software Juridico",
+  "short_name": "ADVOSYS",
+  "start_url": "/index.html",
+  "id": "/index.html",
+  "description": "Software Juridico para advogados.",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "theme_color": "#000080",
+  "background_color": "#000080",
+  "icons": []
+}

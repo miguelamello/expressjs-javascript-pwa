@@ -1,7 +1,7 @@
 "use strict";
 
 import './toolbar.css';
-import template from './toolbar.html';
+import template from './toolbar-html.js';
 import { library, dom } from "@fortawesome/fontawesome-svg-core";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import Menu from '../menu/menu'; 
@@ -28,6 +28,7 @@ class Toolbar {
   #bondToDom() {
     setTimeout(() => {
       this.#menuButton = document.getElementById('2xxxhxkd70');
+      this.setListeners();
     });
   }
 
@@ -87,7 +88,6 @@ class Toolbar {
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();
-    this.setListeners();
   }
 
 }

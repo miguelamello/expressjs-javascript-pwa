@@ -13,6 +13,26 @@ class ConfirmBox {
 
   constructor() {
     this.#setTemplate();
+    this.#appendTemplate();
+    this.#bondToDom();
+  }
+
+  #bondToDom() {
+    setTimeout(() => {
+      this.#overlay = document.getElementById('gejlkfwj0z');
+      this.#container = document.getElementById('50eheignje');
+      this.#message = document.getElementById('2t6gsh8zwg');
+      this.#ok = document.getElementById('stmosg1dar');
+      this.#cancel = document.getElementById('9yjc8uuoue');
+      this.#cancel.addEventListener('click', this.hide.bind(this));
+    });
+  }
+
+  #appendTemplate() {
+    const parser = new DOMParser();
+    const body = document.body;
+    const fragment = parser.parseFromString(this.#template, 'text/html').body;
+    body.appendChild(fragment.firstElementChild);
   }
 
   #setTemplate() {
@@ -25,13 +45,6 @@ class ConfirmBox {
         </div>
       </div>
     `;
-    document.body.insertAdjacentHTML("afterbegin", this.#template);
-    this.#overlay = document.getElementById('gejlkfwj0z');
-    this.#container = document.getElementById('50eheignje');
-    this.#message = document.getElementById('2t6gsh8zwg');
-    this.#ok = document.getElementById('stmosg1dar');
-    this.#cancel = document.getElementById('9yjc8uuoue');
-    this.#cancel.addEventListener('click', this.hide.bind(this));
   }
 
   #display() {

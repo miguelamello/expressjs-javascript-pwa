@@ -1,0 +1,51 @@
+@media screen {
+
+  .passrecovery {
+    background-color: #EAECEE;
+    color: #2C3E50;
+  }
+
+  .passrecovery-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 5%;
+  }
+
+  .passrecovery-form {
+    width: 100%;
+  }
+
+  .passrecovery-form-title {
+    padding: 20px;
+  }
+
+  .passrecovery-input-form {
+    box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 2px solid #D5D8DC;
+    background: #FFFFFF;
+    margin-bottom: 10px;
+    height: 45px;
+  }
+
+  .passrecovery-input-form:focus-within {
+    border-bottom: 2px solid #000080;
+    background: #FFFFFF;
+  }
+
+  .passrecovery-button-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+  }
+
+}

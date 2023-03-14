@@ -10,6 +10,22 @@ class AlertMessage {
 
   constructor() {
     this.#setTemplate();
+    this.#appendTemplate();
+    this.#bondToDom();
+  }
+
+  #bondToDom() {
+    setTimeout(() => {
+      this.#overlay = document.getElementById("u0h2j1qhcv");
+      this.#message = document.getElementById("tnwkx68fxo");
+    });
+  }
+
+  #appendTemplate() {
+    const parser = new DOMParser();
+    const body = document.body;
+    const fragment = parser.parseFromString(this.#template, 'text/html').body;
+    body.appendChild(fragment.firstElementChild);
   }
 
   #setTemplate() {
@@ -18,9 +34,6 @@ class AlertMessage {
         <div class="alertmessage-message-blue" id="tnwkx68fxo"></div>
       </div>
     `;
-    document.body.insertAdjacentHTML("afterbegin", this.#template);
-    this.#overlay = document.getElementById("u0h2j1qhcv");
-    this.#message = document.getElementById("tnwkx68fxo");
   }
 
   #display() {

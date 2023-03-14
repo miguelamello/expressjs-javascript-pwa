@@ -12,6 +12,7 @@ class Login {
   #observers = [];
   #loginForm;
   #support;
+  #passRecovery;
   #emailInput;
 
   constructor() {
@@ -54,8 +55,10 @@ class Login {
   #bondToDom() {
     setTimeout(() => {
       this.#loginForm = document.getElementById('4976ha6hty');
+      this.#passRecovery = document.getElementById('ry3rrk1k4a');
       this.#support = document.getElementById('b37ge60l4l');
       this.#emailInput = document.getElementById('l3wfqfd99w');
+      this.setListeners();
       this.#setMount();
     }); 
   }
@@ -75,7 +78,12 @@ class Login {
         const App = this.getObserver('app');
         const Support = App.getObserver('support');
         (Support) ? Support.load() : App.render('app-body','support');
-      });  
+      });
+      this.#passRecovery.addEventListener('click', (e) => {
+        const App = this.getObserver('app');
+        const Recovery = App.getObserver('passrecovery');
+        (Recovery) ? Recovery.load() : App.render('app-body','passrecovery');
+      }); 
     }, 250);
   }
 
@@ -89,7 +97,6 @@ class Login {
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();
-    this.setListeners();
   }
 
   isLogged() {

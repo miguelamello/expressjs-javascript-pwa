@@ -1,12 +1,19 @@
 "use strict";
 
-import './assets/css/index.css';
+import './index.css';
 import App from './app.js';
 import Session from './controllers/session';
 
 (async () => {
   
   const user = await Session.getEntry('user');
+  const fragment = `
+    <div id="app-root" class="fullscreen">
+      <div id="app-header" class="app-header"></div>
+      <div id="app-body" class="app-body"></div>
+    </div>
+  `;
+  App.appendFragment( fragment );
  
   if ( user ) {
     App.render('app-header','toolbar');

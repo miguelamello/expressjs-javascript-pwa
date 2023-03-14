@@ -30,7 +30,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "webpack --node-env=development",
     "start": "http-server -c-1 -p 3000"
   },
   "keywords": [],
@@ -49,15 +49,19 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
+    "ejs-loader": "^0.5.0",
+    "favicons-webpack-plugin": "^6.0.0",
     "file-loader": "^6.2.0",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "html-webpack-tags-plugin": "^3.0.2",
     "http-server": "^14.1.1",
     "post-loader": "^2.0.0",
     "postcss": "^8.4.20",
     "postcss-loader": "^7.0.2",
     "postcss-preset-env": "^7.8.3",
     "style-loader": "^3.3.1",
+    "webpack-bundle-analyzer": "^4.8.0",
     "webpack-dev-server": "^4.11.1",
     "workbox-webpack-plugin": "^6.5.4"
   }

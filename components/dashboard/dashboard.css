@@ -1,15 +1,63 @@
 @media screen {
 
   .dashboard {
-    background-color: #EAECEE;
-    color: #2C3E50;
+    background-color: #000080;
+    color: #FFFFFF;
+    height: 100%;
+    width: 100%;
   }
 
   .dashboard-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40px auto;
+    height: 100%;
+    background-color: #000080;
+  }
+
+  .dashboard-container-search {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto;
+    background-color: green;
+  }
+
+  .dashboard-container-gauge {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    padding: 15px;
+    background-color: #000080;
+  }
+
+  .dashboard-container-search-input {
+    width: auto;
+    height: 100%;
+    border: none;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .dashboard-container-search-button {
+    background-color: green;
+    color: white;
+    border: none;
+  }
+
+  .dashboard-container-gauge-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding: 15%;
+    border: 1px solid white;
+    border-radius: 5px;
+    text-align: center;
+    justify-items: center;
     align-items: center;
+  }
+
+  .counter {
+    font-size: 1.5em;
+    font-weight: bold;
   }
 
 }

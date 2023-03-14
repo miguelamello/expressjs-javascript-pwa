@@ -21,8 +21,6 @@ class Menu {
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
-    this.#setListeners();
-    this.showUserInfo();
     library.add([faXmark,faPowerOff]);
     dom.watch();
   }
@@ -39,6 +37,8 @@ class Menu {
       this.#logoutButton = document.getElementById('0cjj9m7agt');
       this.#userName = document.getElementById('r7qqialyp0');
       this.#userEmail = document.getElementById('r213ghv5gc');
+      this.#setListeners();
+      this.showUserInfo();
     });
   }
 
@@ -105,7 +105,6 @@ class Menu {
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();
-    this.setListeners();
   }
 
 }

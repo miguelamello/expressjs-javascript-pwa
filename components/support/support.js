@@ -23,6 +23,7 @@ class Support {
       this.#supportForm = document.getElementById('6zag7uzhui');
       this.#homeButton = document.getElementById('sz65h4rbd5');
       this.#nameInput = document.getElementById('jrp1000j8h');
+      this.setListeners();
       this.#setMount();
     }); 
   }
@@ -40,10 +41,13 @@ class Support {
     .then((response) => { return response.json() })
     .then((result) => {
       if ( result.status ) {
-        AlertMessage.hide();
-        const App = this.getObserver('app');
-        const Login = App.getObserver('login');
-        (Login) ? Login.load() : App.render('app-body','login');
+        AlertMessage.show(result.message, 'green');
+        setTimeout(() => { 
+          AlertMessage.hide(); 
+          const App = this.getObserver('app');
+          const Login = App.getObserver('login');
+          (Login) ? Login.load() : App.render('app-body','login');
+        }, 3000);
       } else {
         AlertMessage.show(result.message, 'red');
         setTimeout(() => { AlertMessage.hide(); }, 3000);
@@ -81,11 +85,10 @@ class Support {
 
   getTemplate() { return this.#template; }
 
-  load() { //console.log(`support loaded`);
+  load() {
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
     this.#bondToDom();
-    this.setListeners();
   }
 
 }

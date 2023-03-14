@@ -2,18 +2,28 @@ const date = new Date();
 const path = require("path");
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
+const config = {};
+
+// npm run build -- --node-env=development
+if (process.env.NODE_ENV == 'development') {
+  config.APP_NAME = 'PWA';
+  config.APP_DESCRIPTION = 'Progressive Web Application';
+} else {
+  config.APP_NAME = 'ADVOSYS';
+  config.APP_DESCRIPTION = 'Software Jurídico';
+}
 
 module.exports = {
 
 	mode: "production", 
-	entry: path.resolve(__dirname, "../source/index.js"),
+	entry: path.resolve(__dirname, "index.js"),
 
 	output: {
-		filename: "index.js", 
+		filename: "index.js?[contenthash]", 
 		chunkFilename: '[contenthash].js', 
-		path: path.resolve(__dirname, "../dist")
+		path: path.resolve(__dirname, "../dist"), 
+    clean: true, 
 	},
 
 	optimization: {
@@ -52,36 +62,29 @@ module.exports = {
       },
 			{
         test: /\.html$/,
-        use: 'html-loader',
+        exclude: /node_modules/,
+        use: ['html-loader']
       }
 		]
 	},	
 
-	devServer: {
-    static: {
-      directory: path.join(__dirname, '../dist'),
-    },
-    compress: true,
-    port: 9000,
-  },
-
 	plugins: [
-		new webpack.DefinePlugin({
-      'process.env.VERSION': JSON.stringify(date.getTime())
-    }), 
-		new HtmlWebpackPlugin({
-      template: './index.html',
-      version: '<%= process.env.VERSION %>', 
-    }), 
-		new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ['**/*'],  // delete all files and directories, except for the 'static' directory
+    new webpack.DefinePlugin({
+      APP_NAME: JSON.stringify(config.APP_NAME), 
+      APP_DESCRIPTION: JSON.stringify(config.APP_DESCRIPTION)
     }),
-		/*new WorkboxPlugin.GenerateSW({
-			// these options encourage the ServiceWorkers to get in there fast
-			// and not allow any straggling "old" SWs to hang around
-			clientsClaim: true,
-			skipWaiting: true,
-			swDest: './workbox-service-worker.js'
-		})*/
+    new FaviconsWebpackPlugin({
+      logo: './logo.png', 
+      manifest: './manifest.json',
+      prefix: './'
+    }), 
+		new HtmlWebpackPlugin({ 
+      title: 'Advosys',
+      meta: {
+        'title': 'Advosys', 
+        'description': 'Software Jurídico para Advogados', 
+        'viewport': 'width=device-width, initial-scale=1'
+      }
+    })
 	]
 };

@@ -25,10 +25,10 @@ class Dashboard {
     return true;
   }
 
-  setObserver( index, module ) {
+  setObserver(index, module) {
     this.#observers[index] = module;
   }
-
+  
   getTemplate() { return this.#template; }
 
 }
