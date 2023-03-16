@@ -7,4 +7,8 @@
 #should be configured in appconfig.js
 appconfig.js
 
+#apiconfig.js should be configured with values 
+#suited to the project.
+appiconfig.js
+
 
