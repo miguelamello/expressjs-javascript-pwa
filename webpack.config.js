@@ -2,6 +2,7 @@ const date = new Date();
 const path = require("path");
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackTagsPlugin = require('html-webpack-tags-plugin');
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 const config = {};
 
@@ -83,8 +84,13 @@ module.exports = {
       meta: {
         'title': 'Advosys', 
         'description': 'Software Jurídico para Advogados', 
-        'viewport': 'width=device-width, initial-scale=1'
+        'viewport': 'width=device-width, initial-scale=1', 
+        'content-language': 'pt-BR',
       }
+    }),
+    new HtmlWebpackTagsPlugin({ 
+      scripts: [], 
+      append: true
     })
 	]
 };

@@ -1,17 +1,18 @@
 "use strict";
 
-import './support.css';
-import template from './support.html';
+import './new-account.css';
+import template from './new-account-2.html';
 import configObj from '../../appconfig';
 import AlertMessage from '../alertmessage/alertmessage'; 
 
-class Support {
+// Validate code
+class NewAccount2 {
 
   #template = ``;
   #observers = [];
-  #supportForm;
+  #newAccountForm;
   #homeButton;
-  #nameInput;
+  #codeInput;
 
   constructor() {
     this.#setTemplate();
@@ -20,9 +21,9 @@ class Support {
 
   #bondToDom() {
     setTimeout(() => {
-      this.#supportForm = document.getElementById('6zag7uzhui');
-      this.#homeButton = document.getElementById('sz65h4rbd5');
-      this.#nameInput = document.getElementById('jrp1000j8h');
+      this.#newAccountForm = document.getElementById('slsyzsppnm');
+      this.#homeButton = document.getElementById('m8fz11hwvk');
+      this.#codeInput = document.getElementById('ckon9bk4i0');
       this.setListeners();
       this.#setMount();
     }); 
@@ -32,10 +33,10 @@ class Support {
     this.#template = template;
   }
 
-  #sendSupport( formData ) {
-    AlertMessage.show('Abrindo chamado... um instante.', 'green');
+  #validateCodeEmail( formData ) {
+    AlertMessage.show('Validando código... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
-    const jsonData = { module: 'login', procedure: 'openTicket', params: formDataObject };
+    const jsonData = { module: 'login', procedure: 'validateCodeEmail', params: formDataObject };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
     fetch(configObj.apiurl, fetchOptions)
     .then((response) => { return response.json() })
@@ -45,8 +46,8 @@ class Support {
         setTimeout(() => { 
           AlertMessage.hide(); 
           const App = this.getObserver('app');
-          const Login = App.getObserver('login');
-          (Login) ? Login.load() : App.render('app-body','login');
+          const NewAccount3 = App.getObserver('new_account_3');
+          (NewAccount3) ? NewAccount3.load() : App.render('app-body','new_account_3');
         }, 3000);
       } else {
         AlertMessage.show(result.message, 'red');
@@ -57,15 +58,15 @@ class Support {
 
   /** setMount is called every time DOM is rendered. */
   #setMount() {
-    (this.#nameInput) ? this.#nameInput.focus() : null;
+    (this.#codeInput) ? this.#codeInput.focus() : null;
   }
 
   setListeners() {
     setTimeout(() => { //wait for dom nodes creation
-      this.#supportForm.addEventListener('submit', (e) => {
+      this.#newAccountForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        const formData = new FormData(this.#supportForm);
-        this.#sendSupport(formData);
+        const formData = new FormData(this.#newAccountForm);
+        this.#validateCodeEmail(formData);
       });
       this.#homeButton.addEventListener('click', (e) => {
         const App = this.getObserver('app');
@@ -93,4 +94,4 @@ class Support {
 
 }
 
-export default new Support();
+export default new NewAccount2();

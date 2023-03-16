@@ -8,6 +8,10 @@ class Common {
 
   constructor() {}
 
+  getTicket() {
+    return Math.floor(Math.random() * 900000) + 100000;
+  }
+
   isEmail( email ) {
     return (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/i).test( email );
   }
@@ -15,6 +19,14 @@ class Common {
   isPassword( password ) {
     return (/^[0-9]{8}$/i).test( password );
   }
+
+  isCode( code ) {
+    return (/^[0-9]{6}$/i).test( code );
+  }
+
+  isMobile( number ) {
+    return (/^[0-9]{2}[0-9]{4,5}[0-9]{4}$/i).test(number);
+  };
 
   toCamelCase( str ) {
     const words = str.split(" ");

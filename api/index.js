@@ -25,8 +25,9 @@
 */
 
 const http = require('http');
-const hostname = '127.0.0.1';
-const port = 9000;
+const configObj = require('./modules/apiconfig');
+const hostname = configObj.apihost;
+const port = configObj.apiport;
 
 try {
   http.createServer((request, response) => {

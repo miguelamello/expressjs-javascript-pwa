@@ -12,11 +12,11 @@
 Description=api.mobile.advosys
 
 [Service]
-User=miguel
-Group=miguel
-WorkingDirectory=/home/miguel/www/novo.advosys/mobile/source/api
+User=app.advosys
+Group=app.advosys
+WorkingDirectory=/home/app.advosys/mobile/source/api
 Environment=NODE_ENV=production
-ExecStart=/usr/local/bin/node /home/miguel/www/novo.advosys/mobile/source/api/index.js
+ExecStart=/bin/node /home/app.advosys/mobile/source/api/index.js
 Restart=always
 
 [Install]

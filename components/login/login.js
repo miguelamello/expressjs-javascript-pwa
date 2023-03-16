@@ -14,12 +14,13 @@ class Login {
   #support;
   #passRecovery;
   #emailInput;
+  #newAccount;
 
   constructor() {
     this.#setTemplate();
     this.#bondToDom();
   }
-
+ 
   #login( formData ) {
     AlertMessage.show('Fazendo login... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
@@ -45,7 +46,7 @@ class Login {
 
   /** setMount is called every time DOM is rendered. */
   #setMount() {
-    this.#emailInput.focus();
+    (this.#emailInput) ? this.#emailInput.focus() : null;
   }
 
   #setTemplate() {
@@ -56,6 +57,7 @@ class Login {
     setTimeout(() => {
       this.#loginForm = document.getElementById('4976ha6hty');
       this.#passRecovery = document.getElementById('ry3rrk1k4a');
+      this.#newAccount = document.getElementById('l8n11xuem1');
       this.#support = document.getElementById('b37ge60l4l');
       this.#emailInput = document.getElementById('l3wfqfd99w');
       this.setListeners();
@@ -83,6 +85,11 @@ class Login {
         const App = this.getObserver('app');
         const Recovery = App.getObserver('passrecovery');
         (Recovery) ? Recovery.load() : App.render('app-body','passrecovery');
+      }); 
+      this.#newAccount.addEventListener('click', (e) => {
+        const App = this.getObserver('app');
+        const NewAccount1 = App.getObserver('new_account_1');
+        (NewAccount1) ? NewAccount1.load() : App.render('app-body','new_account_1');
       }); 
     }, 250);
   }

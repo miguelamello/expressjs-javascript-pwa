@@ -19,7 +19,11 @@ class App {
       toolbar: async () => { return await import('./components/toolbar/toolbar.js'); }, 
       login: async () => { return await import('./components/login/login.js'); }, 
       support: async () => { return await import('./components/support/support.js'); }, 
-      passrecovery: async () => { return await import('./components/pass-recovery/pass-recovery.js'); }
+      passrecovery: async () => { return await import('./components/pass-recovery/pass-recovery.js'); }, 
+      new_account_1: async () => { return await import('./components/newaccount/new-account-1.js'); }, 
+      new_account_2: async () => { return await import('./components/newaccount/new-account-2.js'); }, 
+      new_account_3: async () => { return await import('./components/newaccount/new-account-3.js'); }, 
+      //new_account_4: async () => { return await import('./components/newaccount/new-account-4.js'); }
     };
   }
 
@@ -39,6 +43,17 @@ class App {
       const module = moduleDefault.default; // gets the module
       const container = document.getElementById(target); // gets the container
       container.innerHTML = module.getTemplate(); // applies the template to the container
+      module.setObserver('app', this); // sets a reference to the App object
+      this.#setObservers(route, module); // sets obervers on this module
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async getInstance(route) {
+    try {
+      const moduleDefault = await this.#routes[route](); // loads the route
+      const module = moduleDefault.default; // gets the module
       module.setObserver('app', this); // sets a reference to the App object
       this.#setObservers(route, module); // sets obervers on this module
     } catch (error) {
