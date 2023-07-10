@@ -1,8 +1,8 @@
 @media screen {
 
   .dashboard {
-    background-color: #000080;
-    color: #FFFFFF;
+    background-color: #FFFFFF;
+    color: #000000;
     height: 100%;
     width: 100%;
   }
@@ -12,22 +12,15 @@
     grid-template-columns: 1fr;
     grid-template-rows: 40px auto;
     height: 100%;
-    background-color: #000080;
+    background-color: #FFFFFF;
   }
 
   .dashboard-container-search {
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-rows: auto;
-    background-color: green;
-  }
-
-  .dashboard-container-gauge {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-    padding: 15px;
-    background-color: #000080;
+    background-color: #FFFFFF;
+    color: #000000;
   }
 
   .dashboard-container-search-input {
@@ -39,20 +32,14 @@
   }
 
   .dashboard-container-search-button {
-    background-color: green;
-    color: white;
+    background-color: #FFFFFF;
+    color: #000000;
     border: none;
   }
 
-  .dashboard-container-gauge-item {
-    display: grid;
-    grid-template-columns: 1fr;
-    padding: 15%;
-    border: 1px solid white;
-    border-radius: 5px;
-    text-align: center;
-    justify-items: center;
-    align-items: center;
+  .dashboard-container-subtitle {
+    padding-left: 10px;
+    color: grey;
   }
 
   .counter {

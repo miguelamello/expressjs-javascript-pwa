@@ -25,16 +25,20 @@
 */
 
 const http = require('http');
+const Session = require('./modules/session');
 const configObj = require('./modules/apiconfig');
 const hostname = configObj.apihost;
 const port = configObj.apiport;
 
 try {
-  http.createServer((request, response) => {
+  http.createServer((request, response) => { 
+    
+    // Store user-agent in a variable for later use.
+    Session.setUserAgent(request.headers['user-agent']);
 
     //Configure CORS on the server.
     response.setHeader('Access-Control-Allow-Origin', '*');
-    response.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    response.setHeader('Access-Control-Allow-Methods', 'GET, POST');
     response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
     //Content-Type should always be JSON.

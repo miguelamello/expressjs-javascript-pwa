@@ -4,11 +4,24 @@ import configObj from '../appconfig';
 import AlertMessage from '../components/alertmessage/alertmessage';
 import Crypto from '../controllers/crypt';
 class Session {
+  
+  #reload_count;
 
   constructor() {
+    this.#reload_count = 0;
     this.#hasLocalStorage();
   }
 
+  // Relaod the app if session does not exist or is invalid 
+  // but only once to avoid infinite loop
+  #reloadApp() {
+    if (this.#reload_count < 1) {
+      this.#reload_count++;
+      location.reload();
+    }
+  }
+
+  // Check if local storage is available
   #hasLocalStorage() {
     if (typeof localStorage !== 'undefined') {
       this.#hasStoredSession();
@@ -17,17 +30,20 @@ class Session {
     }
   }
 
+  // Check if session exists and is valid. 
+  // If not, activate a new session
   async #hasStoredSession() {
     const session = this.getSession();
     if ( session ) {
        const valid = await this.#validateSession( session.id_sessions );
-       if (!valid) { this.clear(); location.reload(); }
+       if ( valid === false ) this.clear();
     } else {
       const active = await this.#activateSession();
       if (active) this.#hasStoredSession();
     }
   }
 
+  // Show alert message
   #showAlert() {
     AlertMessage.show(`
       Esse navegador não possui os recursos necessários 
@@ -37,16 +53,19 @@ class Session {
     setTimeout(() => AlertMessage.hide(), 10000);
   }
 
+  // Save session on local storage
   #saveSession( session ) {
     localStorage.setItem('session', JSON.stringify(session));
   }
 
+  // Delete session on server
   async #deleteSession( session_id ) {
     const jsonData = { module: 'session', procedure: 'deleteSession', params: { session_id: session_id } };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
     await fetch(configObj.apiurl, fetchOptions);
   }
 
+  // Activate session on server
   async #activateSession() {
     const jsonData = { module: 'session', procedure: 'activateSession', params: {} };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
@@ -56,6 +75,7 @@ class Session {
     return result.status; 
   }
 
+  // Validate session on server
   async #validateSession( session_id ) {
     const jsonData = { module: 'session', procedure: 'validateSession', params: { session_id: session_id } };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
@@ -64,10 +84,17 @@ class Session {
     return result.status;
   }
 
+  // Get session from local storage
   getSession() {
     return JSON.parse(localStorage.getItem('session'));
   }
 
+  // Get session ID from local storage
+  getSessionId() {
+    return (localStorage.getItem('session')) ? (JSON.parse(localStorage.getItem('session'))).id_sessions : 0;
+  }
+
+  // Get entry from local storage
   async getEntry( entry ) {
     const session = this.getSession();
     if ( session ) {
@@ -84,17 +111,20 @@ class Session {
     }
   }
 
+  // Delete entry from local storage
   deleteEntry( entry ) {
     (localStorage.getItem( entry )) ? localStorage.removeItem( entry ) : undefined;
   }
 
+  // Clear session and reload app
   clear() {
     const session = this.getSession();
     this.#deleteSession( session.id_sessions );
     localStorage.clear();
-    location.reload();
+    this.#reloadApp();
   }
 
+  // Save data to local storage
   async saveEntry( entry, data ) {
     const session = this.getSession();
     const encrypted = await Crypto.encrypt(JSON.stringify(data), session.key_sessions, session.iv_sessions);

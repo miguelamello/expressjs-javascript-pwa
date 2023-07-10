@@ -5,6 +5,8 @@ import template from './new-account-1.html';
 import configObj from '../../appconfig';
 import AlertMessage from '../alertmessage/alertmessage'; 
 import ConfirmBox from '../confirmbox/confirmbox'; 
+import Common from '../../controllers/common';
+import Session from '../../controllers/session';
 
 // Colect user email and send code to it.
 class NewAccount1 {
@@ -20,7 +22,7 @@ class NewAccount1 {
     this.#bondToDom();
   }
 
-  #bondToDom() {
+  #bondToDom() {  
     setTimeout(() => {
       this.#newAccountForm = document.getElementById('x5xgry2zp9');
       this.#homeButton = document.getElementById('d6ihz7rvjc');
@@ -37,6 +39,16 @@ class NewAccount1 {
   #sendCodeToEmail( formData ) {
     AlertMessage.show('Enviando o código para seu email... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
+    formDataObject.email = formDataObject.email.trim().toLowerCase();
+    formDataObject.sessionId = Session.getSessionId();
+    if ( !Common._isEmail(formDataObject.email) ) {
+      AlertMessage.show(`
+        Email inválido. Verifique se você digitou corretamente 
+        e tente novamente. Ex: meunome@gmail.com
+      `, 'red');
+      setTimeout(() => { AlertMessage.hide(); }, 3000);
+      return false;
+    }
     const jsonData = { module: 'login', procedure: 'sendCodeToEmail', params: formDataObject };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
     fetch(configObj.apiurl, fetchOptions)
@@ -60,13 +72,14 @@ class NewAccount1 {
             const Login = App.getObserver('login');
             const Recovery = App.getObserver('passrecovery');
             if (Recovery) {
-              console.log(1,Recovery);
+              Recovery.sendPassRecovery(formData);
+              Login.load();
             } else {
               const Promisse = App.getInstance('passrecovery');
               Promisse.then(() => {
                 const Instance = App.getObserver('passrecovery');
                 Instance.sendPassRecovery(formData);
-                (Login) ? Login.load() : App.render('app-body','login');
+                Login.load();
               });
             }
           }); 

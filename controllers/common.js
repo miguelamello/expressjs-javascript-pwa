@@ -28,6 +28,10 @@ function Common() {
     return regex.test(fone);
   };
 
+  this._isPassword = (str = "") => {
+    return (str.trim().length >= 8 && str.trim().length <= 64);
+  };
+
   this._copyObj = ( obj = {} ) => {
     return JSON.parse( JSON.stringify( obj ) );
   };

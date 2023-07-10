@@ -8,14 +8,24 @@ const Common = require('./common');
 const MySql = require('./mysql');
 const Session = require('./session');
 const appMailer = require('./appmailer');
+const RedisMQ = require('./redis');
 const configObj = require('./apiconfig');
-
 class Login {
-
-  #codes = new Map();
   
   constructor() {}
 
+  /** PRIVATE METHODS */
+  async #getUser( email ) {
+    try {
+      const user = await MySql.getSelected('SELECT * FROM `login` WHERE `email_login` = ?', [ email ]);
+      return ( user.length > 0 ) ? user[0] : {};
+    } catch (error) {
+      RedisMQ.lpush('api-log', `${(new Date).toISOString()} ${error.stack}`);
+      return {};
+    }
+  }
+  
+  //** PUBLIC METHODS */
   async doLogin( params ) {
     const load = { status: false, message: "Não foi possível o login com as credenciais enviadas. Verifique e tente novamente", data: [] };
     if ( !params.email ) { load.status = false; load.message = "Email é requerido."; }
@@ -89,7 +99,8 @@ class Login {
         to: params.email,
         subject: `#${ticket} - Reenvio de senha de acesso ao Advosys.`,
         text: `Sua senha atual é: ${result[0].pass_login}}`,
-        html: `Sua senha atual é: ${result[0].pass_login}`
+        html: `Sua senha atual é: ${result[0].pass_login}<br><br>
+               Utilize o email ${params.email} como usuário de acesso.`
       };
       // Send email
       const response = await appMailer.sendMail(mailOptions);
@@ -130,14 +141,19 @@ class Login {
         from: configObj.mailuser,
         to: params.email,
         subject: `#${ticket} - Codigo de confirmação do Advosys.`,
-        text: `Prezado(a) Usuário(a),\n\nDigite/copie o seguinte código no app: ${ticket}`,
-        html: `Prezado(a) Usuário(a),<br><br>Digite/copie o seguinte código no app: ${ticket}`
+        text: `Prezado(a) Usuário(a),\n\nDigite/copie o seguinte código no app: ${ticket}\n\nObs: O código é válido por 60 minutos.`,
+        html: `Prezado(a) Usuário(a),<br><br>Digite/copie o seguinte código no app: ${ticket}<br><br>Obs: O código é válido por 60 minutos.`
       };
       // Send email
       const response = await appMailer.sendMail(mailOptions);
-      load.status = response.status; 
-      load.message = response.message;
-      this.#codes.set(String(ticket), ticket);
+      if ( response.status ) {
+        load.status = response.status; 
+        load.message = response.message;
+        await RedisMQ.sadd('tickets', ticket);
+        await RedisMQ.expire('tickets', 3600);
+        await RedisMQ.setKey(`session:${params.sessionId}`, JSON.stringify(params));
+        await RedisMQ.expire(`session:${params.sessionId}`, 3600);
+      }
       return load;
     } catch (error) {
       load.message = 'Houve algum erro no envio da mensagem. Tente novamente mais tarde.';
@@ -160,10 +176,10 @@ class Login {
       return load;
     }
     // Check if code exists
-    if (this.#codes.has(params.code)) {
+    if (await RedisMQ.sismember('tickets', params.code)) {
       load.status = true; 
       load.message = "Código válido.";
-      this.#codes.delete(params.code);
+      await RedisMQ.srem('tickets', params.code);
     }
     return load;
   }
@@ -182,11 +198,89 @@ class Login {
       load.message = "Celular é inválido."; 
       return load;
     }
-    const ticket = Common.getTicket()
-    load.status = true; 
-    load.message = "Código enviado para o celular.";
-    this.#codes.set(String(ticket), ticket);
+    // Send SMS
+    const ticket = Common.getTicket();
+    const message = `ADVOSYS - Codigo de Confirmação: ${ticket}`; 
+    const data = {
+      Sender: ticket,
+      Receivers: params.mobile,
+      Content: message
+    };
+    const promisse = await fetch('https://sms.comtele.com.br/api/v2/send', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'auth-key': configObj.token_comtele
+      },
+      body: JSON.stringify(data)
+    });
+    const response = await promisse.json();
+    if (response.Success ) {
+      load.status = true; 
+      load.message = "Código enviado para o celular. Verifique.";
+      await RedisMQ.sadd('tickets', ticket);
+      await RedisMQ.expire('tickets', 3600);
+      let session = await RedisMQ.getKey(`session:${params.sessionId}`);
+      session = JSON.parse(session);
+      session = { ...session, ...params };
+      await RedisMQ.setKey(`session:${params.sessionId}`, JSON.stringify(session));
+      await RedisMQ.expire(`session:${params.sessionId}`, 3600);
+    } else {
+      console.log('Comtele API Response: ', response);
+    }
     return load;
+  }
+
+  async validateCodeMobile( params ) {
+    const load = { 
+      status: false, 
+      message: "Não foi possível validar o código. Tente novamente daqui a pouco.", 
+      data: [] 
+    };
+    if ( !params.code ) { 
+      load.message = "Código é requerido."; 
+      return load;
+    }
+    if ( !Common.isCode( params.code ) ) { 
+      load.message = "Código é inválido."; 
+      return load;
+    }
+    // Check if code exists
+    if (await RedisMQ.sismember('tickets', params.code)) {
+      load.status = true; 
+      load.message = "Código válido.";
+      await RedisMQ.srem('tickets', params.code);
+    }
+    return load;
+  }
+
+  async createAccount( params ) {
+    try {
+      const load = { 
+        status: false, 
+        message: "Não foi possível criar a conta. Tente novamente daqui a pouco.", 
+        data: [] 
+      };
+      if (parseInt(params.sessionId)) {
+        let session = await RedisMQ.getKey(`session:${params.sessionId}`);
+        session = JSON.parse(session);
+        const user = await this.#getUser(session.email);
+        /*if ( user.length > 0 ) {
+          load.message = "Email já existente no sistema. Deseja recuperar a senha?";
+          load.data = { redirect: true, email: session.email };
+          return load;
+        }*/
+        console.log(user);
+      }
+      return load;
+    } catch (error) {
+      RedisMQ.lpush('api-log', `${(new Date).toISOString()} ${error.stack}`);
+      return { 
+        status: false, 
+        message: "Não foi possível criar a conta. Tente novamente daqui a pouco.", 
+        data: [] 
+      };
+    }
   }
 }
 

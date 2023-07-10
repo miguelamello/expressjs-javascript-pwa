@@ -4,7 +4,9 @@ import './login.css';
 import template from './login.html';
 import configObj from '../../appconfig';
 import AlertMessage from '../alertmessage/alertmessage'; 
+import ConfirmBox from '../confirmbox/confirmbox';
 import Session from '../../controllers/session';
+import Common from '../../controllers/common';
 
 class Login {
 
@@ -24,6 +26,26 @@ class Login {
   #login( formData ) {
     AlertMessage.show('Fazendo login... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
+    formDataObject.email = formDataObject.email.trim().toLowerCase();
+    formDataObject.password = formDataObject.password.trim();
+    if ( !Common._isEmail(formDataObject.email) ) {
+      AlertMessage.show(`
+        Email inválido. Verifique se você digitou corretamente 
+        e tente novamente. Ex: meunome@gmail.com
+      `, 'red');
+      setTimeout(() => { AlertMessage.hide(); }, 3000);
+      return false;
+    }
+    if ( !Common._isPassword(formDataObject.password) ) {
+      AlertMessage.show(`
+        Senha inválida. Senha deve conter de 8 à 64 letras, 
+        numeros e caracteres especiais. Quanto maior e mais 
+        dificil sua senha, melhor para sua segurança. 
+        Verifique e tente novamente.
+      `, 'red');
+      setTimeout(() => { AlertMessage.hide(); }, 3000);
+      return false;
+    }
     const jsonData = { module: 'login', procedure: 'doLogin', params: formDataObject };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
     fetch(configObj.apiurl, fetchOptions)
@@ -65,13 +87,58 @@ class Login {
     }); 
   }
 
+  #createAccount() {
+    AlertMessage.show('Iniciando a criação da sua conta... Aguarde por favor.', 'green');
+    const formDataObject = { sessionId: Session.getSessionId() };
+    const jsonData = { module: 'login', procedure: 'createAccount', params: formDataObject };
+    const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
+    fetch(configObj.apiurl, fetchOptions)
+    .then((response) => { return response.json() })
+    .then((result) => {
+      if ( result.status ) {
+        AlertMessage.show(result.message, 'green');
+        setTimeout(() => { 
+          AlertMessage.hide(); 
+        }, 3000);
+      } else {
+        if (result.data.redirect) {
+          AlertMessage.hide();
+          ConfirmBox.show(result.message, 'red').then(() => {
+            ConfirmBox.hide();
+            const Toolbar = this.getObserver('toolbar');
+            const App = this.getObserver('app');
+            const Login = App.getObserver('login');
+            const Recovery = App.getObserver('passrecovery');
+            // Create a new FormData object and apppnd email to it.
+            const formData = new FormData();
+            formData.append('email', result.data.email);
+            if (Recovery) {
+              Recovery.sendPassRecovery(formData);
+              Login.load();
+            } else {
+              const Promisse = App.getInstance('passrecovery');
+              Promisse.then(() => {
+                const Instance = App.getObserver('passrecovery');
+                Instance.sendPassRecovery(formData);
+                Login.load();
+              });
+            }
+          }); 
+        } else {
+          AlertMessage.show(result.message, 'red');
+          setTimeout(() => { AlertMessage.hide(); }, 3000);
+        }
+      }
+    });
+  }
+
   getObserver(index) {
     return this.#observers[index];
   }
 
   setListeners() {
     setTimeout(() => { //wait for dom nodes creation
-      this.#loginForm.addEventListener('submit', (e) => {
+      this.#loginForm.addEventListener('submit', (e) => { 
         e.preventDefault();
         const formData = new FormData(this.#loginForm);
         this.#login(formData);
@@ -100,14 +167,19 @@ class Login {
 
   getTemplate() { return this.#template; }
 
-  load() {
+  load(callback = undefined) {
     const container = document.getElementById('app-body'); //gets the container
     container.innerHTML = this.getTemplate(); //applies the template to the container
+    if (callback) this[callback]();
     this.#bondToDom();
   }
 
   isLogged() {
     return (Session.getEntry('user')) ? true : false;
+  }
+
+  initAccountCreation() {
+    this.#createAccount();
   }
 
 }

@@ -27,7 +27,7 @@ class appMailer {
   async sendMail( mailOptions ) {
     const load = { 
       status: false, 
-      message: "Não foi possível enviar o email. Tente novamente daqui a pouco.", 
+      message: "Houve algum erro no envio da mensagem. Tente novamente mais tarde.", 
       data: [] 
     };
     // send mail with defined transport object

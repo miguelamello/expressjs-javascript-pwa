@@ -4,6 +4,7 @@ import './new-account.css';
 import template from './new-account-3.html';
 import configObj from '../../appconfig';
 import AlertMessage from '../alertmessage/alertmessage'; 
+import Session from '../../controllers/session';
 
 // Colect cel number and send code
 class NewAccount3 {
@@ -36,18 +37,19 @@ class NewAccount3 {
   #sendCodeToMobile( formData ) {
     AlertMessage.show('Enviando o código para seu celular... um instante.', 'green');
     const formDataObject = Object.fromEntries(formData.entries());
+    formDataObject.sessionId = Session.getSessionId();
     const jsonData = { module: 'login', procedure: 'sendCodeToMobile', params: formDataObject };
     const fetchOptions = { method: "POST", body: JSON.stringify(jsonData) };
     fetch(configObj.apiurl, fetchOptions)
     .then((response) => { return response.json() })
     .then((result) => {
-      if ( result.status ) { console.log(result);
+      if ( result.status ) {
         AlertMessage.show(result.message, 'green');
         setTimeout(() => { 
           AlertMessage.hide(); 
-          //const App = this.getObserver('app');
-          //const NewAccount4 = App.getObserver('new_account_4');
-          //(NewAccount4) ? NewAccount4.load() : App.render('app-body','new_account_4');
+          const App = this.getObserver('app');
+          const NewAccount4 = App.getObserver('new_account_4');
+          (NewAccount4) ? NewAccount4.load() : App.render('app-body','new_account_4');
         }, 3000);
       } else {
         AlertMessage.show(result.message, 'red');

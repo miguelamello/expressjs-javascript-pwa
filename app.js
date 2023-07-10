@@ -23,7 +23,7 @@ class App {
       new_account_1: async () => { return await import('./components/newaccount/new-account-1.js'); }, 
       new_account_2: async () => { return await import('./components/newaccount/new-account-2.js'); }, 
       new_account_3: async () => { return await import('./components/newaccount/new-account-3.js'); }, 
-      //new_account_4: async () => { return await import('./components/newaccount/new-account-4.js'); }
+      new_account_4: async () => { return await import('./components/newaccount/new-account-4.js'); }
     };
   }
 

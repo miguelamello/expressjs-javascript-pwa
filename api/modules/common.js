@@ -17,7 +17,7 @@ class Common {
   }
 
   isPassword( password ) {
-    return (/^[0-9]{8}$/i).test( password );
+    return (/^.{8,64}$/i).test( password.trim() );
   }
 
   isCode( code ) {
